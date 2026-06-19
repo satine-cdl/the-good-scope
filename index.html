@@ -1,108 +1,127 @@
 <!DOCTYPE html>
-<html class="light" lang="en">
+<html lang="en">
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>THE SCOPE - Archive</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+    <!-- Nouvelles polices éditoriales -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet"/>
     
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        background: "#F9FAFF",
-                        primary: "#000000",
-                        outline: "#747878",
-                        "accent-blue": "#CFDEEB",
-                        "accent-pink": "#F9B9EE",
-                        "accent-yellow": "#F5F074"
+                        background: "#EBEBEB", // Gris très clair style papier
+                        primary: "#111111",
+                        accent: "#F9B9EE", // Le rose de ton moodboard
                     },
                     fontFamily: {
-                        "mono-data": ["JetBrains Mono", "monospace"],
-                        "display": ["Inter", "sans-serif"],
+                        "serif": ["Playfair Display", "serif"],
+                        "sans": ["Space Grotesk", "sans-serif"],
                     }
                 }
             }
         }
     </script>
     <style>
-        body { background-color: theme('colors.background'); color: theme('colors.primary'); }
-        .grid-bg {
-            background-size: 25% 100%, 100% 25%;
-            background-image: 
-                linear-gradient(to right, theme('colors.outline') 1px, transparent 1px),
-                linear-gradient(to bottom, theme('colors.outline') 1px, transparent 1px);
-            background-position: center top;
+        body { 
+            background-color: theme('colors.background'); 
+            color: theme('colors.primary'); 
+        }
+        /* Le fond à pois (Dot Grid) inspiré de ton image */
+        .dot-grid {
+            background-image: radial-gradient(theme('colors.primary') 1px, transparent 1px);
+            background-size: 32px 32px;
             opacity: 0.15;
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none;
         }
+        /* Cache la barre de défilement pour un look plus clean */
+        ::-webkit-scrollbar { width: 0px; }
     </style>
 </head>
 
-<body class="min-h-screen relative overflow-x-hidden font-display flex flex-col items-center">
-    <div class="grid-bg"></div>
+<body class="min-h-screen relative overflow-x-hidden font-sans selection:bg-accent selection:text-primary">
+    <div class="dot-grid"></div>
 
-    <nav class="w-full flex justify-between items-center px-10 py-6 z-50 border-b border-primary">
-        <div class="text-2xl tracking-tighter uppercase font-mono-data">ARCHIVE_01</div>
-        <div class="flex items-center gap-4">
-            <span class="material-symbols-outlined cursor-crosshair">photo_camera</span>
+    <!-- Navigation minimaliste -->
+    <nav class="w-full flex justify-between items-start px-8 py-8 z-50 fixed top-0 mix-blend-difference text-white pointer-events-none">
+        <div class="text-sm tracking-widest uppercase pointer-events-auto cursor-pointer hover:opacity-50 transition-opacity">ARCHIVE_01</div>
+        <div class="text-sm tracking-widest text-right">
+            VOL. I <br> 2026
         </div>
     </nav>
 
-    <main class="w-full max-w-3xl flex flex-col items-center justify-center z-20 text-center mt-24 px-6">
-        <h1 class="text-6xl tracking-tighter mb-12 uppercase mix-blend-multiply font-thin">The Scope</h1>
+    <!-- Header / Typographie Géante -->
+    <main class="w-full flex flex-col items-center justify-center z-20 mt-32 md:mt-48 px-6 relative">
+        <h1 class="text-[12vw] leading-none font-serif tracking-tighter uppercase text-center flex flex-col items-center">
+            <span>The</span>
+            <span class="italic ml-12 md:ml-32 text-accent mix-blend-multiply">Scope</span>
+        </h1>
         
-        <div class="w-full relative group">
-            <input id="searchInput" class="w-full bg-transparent border-0 border-b border-primary focus:ring-0 focus:border-primary font-mono-data text-center px-0 py-3 transition-all outline-none" placeholder="QUERY ARCHIVE (ex: streetwear, bio, denim)..." type="text"/>
-            
-            <button id="imageSearchBtn" class="absolute right-0 bottom-3 opacity-50 hover:opacity-100 transition-opacity">
-                <span class="material-symbols-outlined">center_focus_weak</span>
-            </button>
+        <!-- Mots flottants style magazine -->
+        <div class="absolute top-1/2 left-10 hidden md:block text-xs uppercase tracking-[0.3em] rotate-90 origin-left opacity-50">Independent</div>
+        <div class="absolute bottom-0 right-10 hidden md:block text-xs uppercase tracking-[0.3em] -rotate-90 origin-right opacity-50">Fashion Directory</div>
+
+        <!-- Barre de recherche -->
+        <div class="w-full max-w-xl relative group mt-24">
+            <input id="searchInput" class="w-full bg-transparent border-0 border-b border-primary/30 focus:ring-0 focus:border-primary font-sans text-center text-sm tracking-widest px-0 py-4 transition-all outline-none placeholder:text-primary/30 uppercase" placeholder="Search archive..." type="text"/>
+            <span class="material-symbols-outlined absolute right-0 bottom-4 opacity-30">search</span>
         </div>
     </main>
 
-    <section id="resultsContainer" class="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-8 mt-16 px-6 z-20 pb-24">
+    <!-- Grille déstructurée des résultats -->
+    <section id="resultsContainer" class="w-full max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-24 mt-32 px-6 z-20 pb-32">
+        <!-- Les cartes s'afficheront ici -->
     </section>
 
     <script>
         let brandsData = [];
 
-        // 1. Charger la base de données au démarrage
         async function loadDatabase() {
             try {
                 const response = await fetch('brands.json');
                 brandsData = await response.json();
-                displayResults(brandsData); // Affiche tout par défaut
+                displayResults(brandsData);
             } catch (error) {
-                console.error("Erreur de chargement des données:", error);
-                document.getElementById('resultsContainer').innerHTML = "<p class='font-mono-data text-red-500'>* SYSTEM ERROR: DATABASE OFFLINE *</p>";
+                console.error("Erreur:", error);
+                document.getElementById('resultsContainer').innerHTML = "<p class='col-span-2 text-center text-red-500 uppercase tracking-widest'>Database offline.</p>";
             }
         }
 
-        // 2. Afficher les résultats sous forme de cartes "Zine"
         function displayResults(brands) {
             const container = document.getElementById('resultsContainer');
-            container.innerHTML = ''; // On vide le conteneur
+            container.innerHTML = ''; 
 
             if (brands.length === 0) {
-                container.innerHTML = "<p class='col-span-2 text-center font-mono-data'>NO MATCH FOUND IN ARCHIVE.</p>";
+                container.innerHTML = "<p class='col-span-2 text-center text-3xl font-serif italic text-primary/50 mt-12'>Nothing found.</p>";
                 return;
             }
 
-            brands.forEach(brand => {
+            // Ajout de l'index pour pouvoir décaler une carte sur deux (effet staggered)
+            brands.forEach((brand, index) => {
+                // Si l'index est impair, on ajoute une marge en haut sur desktop
+                const staggeredClass = index % 2 !== 0 ? 'md:mt-32' : '';
+
                 const card = `
-                    <div class="border border-primary bg-white p-4 shadow-[4px_4px_0px_0px_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_#000] transition-all cursor-crosshair flex flex-col">
-                        <img src="${brand.image_url}" alt="${brand.name}" class="w-full h-48 object-cover grayscale hover:grayscale-0 transition-all border border-primary mb-4" />
-                        <div class="flex justify-between items-start mb-2">
-                            <h2 class="text-2xl font-bold uppercase tracking-tighter">${brand.name}</h2>
-                            <span class="font-mono-data text-sm bg-accent-yellow px-2 py-1 border border-primary">${brand.price}</span>
+                    <div class="group relative flex flex-col ${staggeredClass}">
+                        <div class="relative overflow-hidden w-full aspect-[4/5] bg-gray-200 cursor-crosshair">
+                            <img src="${brand.image_url}" alt="${brand.name}" class="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-700 ease-in-out group-hover:scale-105" />
+                            
+                            <!-- Badges d'engagement -->
+                            <div class="absolute top-4 left-4 flex flex-col gap-1 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+                                ${brand.commitments.map(c => `<span class="text-[10px] uppercase tracking-widest bg-white/90 text-black px-2 py-1 backdrop-blur-sm">${c}</span>`).join('')}
+                            </div>
                         </div>
-                        <p class="font-mono-data text-sm mb-4 uppercase opacity-70">${brand.style} // ${brand.location}</p>
-                        <div class="mt-auto flex flex-wrap gap-2">
-                            ${brand.commitments.map(c => `<span class="text-xs font-mono-data border border-primary px-1 bg-accent-blue">${c}</span>`).join('')}
+                        
+                        <div class="mt-6 flex flex-col gap-1">
+                            <div class="flex justify-between items-baseline">
+                                <h2 class="text-4xl font-serif uppercase tracking-tight">${brand.name}</h2>
+                                <span class="text-xs uppercase tracking-widest border border-primary/20 px-2 py-1 rounded-full">${brand.price}</span>
+                            </div>
+                            <p class="text-xs uppercase tracking-widest text-primary/60 mt-2">${brand.style} — ${brand.location}</p>
                         </div>
                     </div>
                 `;
@@ -110,20 +129,16 @@
             });
         }
 
-        // 3. Écouter ce que l'utilisateur tape dans la barre de recherche
         document.getElementById('searchInput').addEventListener('input', (e) => {
             const query = e.target.value.toLowerCase();
-            
             const filteredBrands = brandsData.filter(brand => {
                 return brand.name.toLowerCase().includes(query) || 
                        brand.style.toLowerCase().includes(query) ||
                        brand.commitments.join(" ").toLowerCase().includes(query);
             });
-            
             displayResults(filteredBrands);
         });
 
-        // 4. Lancer le chargement
         loadDatabase();
     </script>
 </body>
