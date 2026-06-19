@@ -1,0 +1,38 @@
+[
+  {
+    "id": "001",
+    "name": "Story mfg.",
+    "style": "Streetwear Artisanal",
+    "price": "€€€",
+    "location": "Royaume-Uni",
+    "commitments": ["Teintures naturelles", "Zéro déchet", "Slow fashion"],
+    "image_url": "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=600&auto=format&fit=crop"
+  },
+  {
+    "id": "002",
+    "name": "Mud Jeans",
+    "style": "Denim / Casual",
+    "price": "€€",
+    "location": "Pays-Bas",
+    "commitments": ["Économie circulaire", "Jeans recyclés", "Coton bio"],
+    "image_url": "https://images.unsplash.com/photo-1542272604-787c3835535d?q=80&w=600&auto=format&fit=crop"
+  },
+  {
+    "id": "003",
+    "name": "Asket",
+    "style": "Minimaliste / Basiques",
+    "price": "€€",
+    "location": "Suède",
+    "commitments": ["Traçabilité 100%", "Prix transparents", "Intemporel"],
+    "image_url": "https://images.unsplash.com/photo-1588099768531-a72d4a198538?q=80&w=600&auto=format&fit=crop"
+  },
+  {
+    "id": "004",
+    "name": "Kowtow",
+    "style": "Avant-garde / Épuré",
+    "price": "€€€",
+    "location": "Nouvelle-Zélande",
+    "commitments": ["100% Coton bio équitable", "Fin de vie circulaire"],
+    "image_url": "https://images.unsplash.com/photo-1595777457583-95e059d581b8?q=80&w=600&auto=format&fit=crop"
+  }
+]
