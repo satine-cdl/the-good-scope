@@ -1,22 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="utf-8"/>
     <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
     <title>THE SCOPE - Archive</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-    <!-- Typographie ultra-fine (Jost) et technique (JetBrains) -->
-    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@100;200;300;400&family=JetBrains+Mono:wght@100;300;400&display=swap" rel="stylesheet"/>
+    <!-- Polices ultra-premium -->
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@100;300;400;500&family=JetBrains+Mono:wght@100;300;400&display=swap" rel="stylesheet"/>
     
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        background: "#FFFFFF", // Blanc pur comme sur tes refs
+                        background: "#FCFCFC",
                         primary: "#111111",
-                        line: "#F0F0F0", // Gris presque invisible
                     },
                     fontFamily: {
                         "display": ["Jost", "sans-serif"],
@@ -28,111 +26,197 @@
     </script>
     <style>
         body { background-color: theme('colors.background'); color: theme('colors.primary'); }
-        ::-webkit-scrollbar { width: 0px; }
+        
+        /* Cacher les barres de défilement pour un look parfait */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        
+        /* Le texte géant en filigrane au fond (comme sur ta capture) */
+        .bg-watermark {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 25vw;
+            font-family: 'Jost', sans-serif;
+            font-weight: 100;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(17, 17, 17, 0.03);
+            z-index: -1;
+            pointer-events: none;
+            white-space: nowrap;
+        }
     </style>
 </head>
 
-<body class="min-h-screen relative overflow-x-hidden font-display">
+<body class="relative overflow-x-hidden font-display selection:bg-primary selection:text-white">
+    
+    <!-- Filigrane géant au fond -->
+    <div class="bg-watermark">SCOPE</div>
 
-    <!-- Navigation minimaliste -->
-    <nav class="w-full flex justify-between items-center px-12 py-8 z-50 fixed top-0 bg-background/90 backdrop-blur-md">
+    <!-- Navigation du Haut -->
+    <nav class="w-full flex justify-between items-center px-10 py-8 z-50 fixed top-0 bg-background/80 backdrop-blur-md">
         <div class="text-xl font-display font-light tracking-[0.3em] uppercase">
             THE SCOPE
         </div>
 
         <div class="hidden md:flex gap-12">
-            <a href="#" class="text-[9px] font-mono tracking-[0.2em] uppercase opacity-40 hover:opacity-100 transition-opacity pb-1 border-b border-primary">The Index</a>
-            <a href="#" class="text-[9px] font-mono tracking-[0.2em] uppercase opacity-40 hover:opacity-100 transition-opacity">Ecosystem</a>
-            <a href="#" class="text-[9px] font-mono tracking-[0.2em] uppercase opacity-40 hover:opacity-100 transition-opacity">Traceability</a>
-            <a href="#" class="text-[9px] font-mono tracking-[0.2em] uppercase opacity-40 hover:opacity-100 transition-opacity">Contribute</a>
+            <a href="#" class="text-[10px] font-mono tracking-[0.2em] uppercase opacity-40 hover:opacity-100 transition-opacity pb-1 border-b border-primary">The Index</a>
+            <a href="#" class="text-[10px] font-mono tracking-[0.2em] uppercase opacity-40 hover:opacity-100 transition-opacity">Ecosystem</a>
+            <a href="#" class="text-[10px] font-mono tracking-[0.2em] uppercase opacity-40 hover:opacity-100 transition-opacity">Traceability</a>
+            <a href="#" class="text-[10px] font-mono tracking-[0.2em] uppercase opacity-40 hover:opacity-100 transition-opacity">Contribute</a>
         </div>
     </nav>
 
-    <!-- Header -->
-    <main class="w-full flex flex-col items-center justify-center z-20 mt-40 px-6">
-        <h1 class="text-[12vw] leading-none font-display font-thin tracking-widest uppercase text-center">
-            THE SCOPE
-        </h1>
+    <!-- Layout Principal divisé en 2 colonnes -->
+    <div class="flex max-w-[120rem] mx-auto px-6 md:px-12 mt-32 relative">
         
-        <!-- Barre de recherche invisible (juste du texte tapable) -->
-        <div class="w-full max-w-xl relative mt-24 mb-16">
-            <input id="searchInput" class="w-full bg-transparent border-0 border-b border-primary/20 focus:border-primary focus:ring-0 font-mono text-center text-[10px] tracking-[0.3em] px-0 py-4 outline-none placeholder:text-primary/30 uppercase transition-colors" placeholder="Type to search archive..." type="text"/>
-        </div>
-    </main>
+        <!-- COLONNE GAUCHE : Le Menu Défilant (Fixe) -->
+        <aside class="w-1/4 hidden md:flex flex-col sticky top-32 h-[calc(100vh-10rem)] pr-8 border-r border-primary/10">
+            
+            <!-- Recherche -->
+            <div class="mb-8 relative">
+                <input id="searchInput" class="w-full bg-transparent border-b border-primary/20 focus:border-primary focus:ring-0 font-mono text-[10px] tracking-[0.2em] py-3 outline-none placeholder:text-primary/30 uppercase transition-colors" placeholder="Search archive..." type="text"/>
+            </div>
 
-    <!-- Liste Éditoriale (Table of Contents Style) -->
-    <section id="resultsContainer" class="w-full max-w-6xl mx-auto flex flex-col pb-32">
-        <!-- Les lignes générées par le JS apparaîtront ici -->
-    </section>
+            <!-- Liste des marques (Index) -->
+            <ul id="leftMenu" class="overflow-y-auto flex flex-col gap-4 no-scrollbar pb-32 pt-4">
+                <!-- Rempli par le JS -->
+            </ul>
+        </aside>
+
+        <!-- COLONNE DROITE : La Galerie d'Images (Scrollable) -->
+        <main id="rightContent" class="w-full md:w-3/4 flex flex-col pl-0 md:pl-24 pb-64">
+            <!-- Rempli par le JS -->
+        </main>
+
+    </div>
 
     <script>
         let brandsData = [];
 
         async function loadDatabase() {
             try {
-                // Le "?v=..." force le navigateur à vider son cache et à charger tes 100 marques
                 const cacheBuster = new Date().getTime();
                 const response = await fetch(`brands.json?v=${cacheBuster}`);
                 brandsData = await response.json();
                 displayResults(brandsData);
             } catch (error) {
                 console.error("Erreur:", error);
-                document.getElementById('resultsContainer').innerHTML = "<p class='text-center text-red-500 font-mono text-[10px] uppercase tracking-widest mt-12'>System offline.</p>";
+                document.getElementById('rightContent').innerHTML = "<p class='text-red-500 font-mono tracking-widest uppercase mt-12'>System offline.</p>";
             }
         }
 
         function displayResults(brands) {
-            const container = document.getElementById('resultsContainer');
-            container.innerHTML = ''; 
+            const leftMenu = document.getElementById('leftMenu');
+            const rightContent = document.getElementById('rightContent');
+            
+            leftMenu.innerHTML = ''; 
+            rightContent.innerHTML = ''; 
 
             if (brands.length === 0) {
-                container.innerHTML = "<p class='text-center text-[10px] font-mono tracking-widest uppercase opacity-40 mt-12'>No match found.</p>";
+                leftMenu.innerHTML = "<p class='text-[10px] font-mono opacity-50 uppercase'>No results</p>";
+                rightContent.innerHTML = "<p class='text-2xl font-display font-light uppercase tracking-widest opacity-30 mt-32'>No matching brand found in archive.</p>";
                 return;
             }
 
-            // Génération de la liste façon sommaire de magazine
             brands.forEach(brand => {
-                const row = `
-                    <a href="${brand.website}" target="_blank" rel="noopener noreferrer" class="group flex flex-col md:flex-row items-center justify-between w-full py-6 md:py-10 hover:bg-[#FAFAFA] transition-colors duration-500 cursor-crosshair">
+                // 1. CRÉATION DU BOUTON DANS LE MENU DE GAUCHE
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <button onclick="document.getElementById('brand-${brand.id}').scrollIntoView({behavior: 'smooth'})" 
+                            class="menu-btn w-full text-left text-[11px] font-mono uppercase tracking-[0.2em] opacity-30 hover:opacity-100 transition-all duration-300" 
+                            id="menu-${brand.id}">
+                        ${brand.name}
+                    </button>
+                `;
+                leftMenu.appendChild(li);
+
+                // 2. CRÉATION DE LA GRANDE IMAGE À DROITE
+                // On utilise min-h-screen pour que chaque image prenne la taille de l'écran (effet d'exposition)
+                const section = document.createElement('div');
+                section.id = `brand-${brand.id}`;
+                section.className = "w-full min-h-[90vh] flex flex-col justify-center mb-32 md:mb-0 brand-section";
+                
+                section.innerHTML = `
+                    <a href="${brand.website}" target="_blank" rel="noopener noreferrer" class="group block relative w-full">
                         
-                        <!-- Gauche : Nom de la marque -->
-                        <div class="w-full md:w-1/3 text-center md:text-left pl-0 md:pl-12 mb-6 md:mb-0">
-                            <h2 class="text-2xl md:text-3xl font-display font-light uppercase tracking-[0.2em] group-hover:tracking-[0.25em] transition-all duration-500">${brand.name}</h2>
+                        <!-- L'image en couleurs naturelles, format 16:9, avec une ombre premium -->
+                        <div class="relative w-full aspect-video md:aspect-[3/2] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.08)] bg-gray-100">
+                            <img src="${brand.image_url}" alt="${brand.name}" class="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105" loading="lazy" />
+                            
+                            <!-- Voile subtil au survol pour faire ressortir le clic -->
+                            <div class="absolute inset-0 bg-primary/0 group-hover:bg-primary/5 transition-colors duration-500"></div>
                         </div>
                         
-                        <!-- Centre : Image (empilées verticalement) -->
-                        <div class="w-full md:w-1/3 flex justify-center relative">
-                            <div class="w-48 h-64 overflow-hidden relative">
-                                <img src="${brand.image_url}" alt="${brand.name}" class="w-full h-full object-cover grayscale opacity-70 group-hover:opacity-100 group-hover:grayscale-0 transition-all duration-700 group-hover:scale-105" loading="lazy" />
-                                
-                                <!-- Les 3 petits textes (commitments) en haut à gauche de l'image -->
-                                <div class="absolute top-2 left-2 flex flex-col gap-1 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-                                    ${brand.commitments.map(c => `<span class="text-[7px] font-mono uppercase tracking-[0.2em] bg-white/90 text-primary px-2 py-[2px] backdrop-blur-sm">${c}</span>`).join('')}
+                        <!-- Informations sous l'image -->
+                        <div class="mt-8 flex flex-col md:flex-row justify-between items-start md:items-end">
+                            <div>
+                                <h2 class="text-4xl md:text-5xl font-display font-light uppercase tracking-[0.1em] group-hover:tracking-[0.15em] transition-all duration-500">${brand.name}</h2>
+                                <p class="text-[10px] font-mono uppercase tracking-[0.2em] opacity-40 mt-4">${brand.style} // ${brand.location}</p>
+                            </div>
+                            
+                            <div class="mt-6 md:mt-0 flex flex-col items-start md:items-end gap-3">
+                                <span class="text-[10px] font-mono uppercase tracking-[0.3em] opacity-30">${brand.price}</span>
+                                <div class="flex flex-wrap gap-2 justify-end">
+                                    ${brand.commitments.map(c => `<span class="text-[8px] font-mono uppercase tracking-[0.1em] border border-primary/20 px-2 py-1">${c}</span>`).join('')}
                                 </div>
                             </div>
                         </div>
-                        
-                        <!-- Droite : Style et Localisation -->
-                        <div class="w-full md:w-1/3 text-center md:text-right pr-0 md:pr-12 mt-6 md:mt-0 flex flex-col items-center md:items-end gap-2">
-                            <span class="text-[9px] font-mono uppercase tracking-[0.3em] opacity-80">${brand.style}</span>
-                            <div class="w-4 h-[1px] bg-primary/20 my-1"></div>
-                            <span class="text-[9px] font-mono uppercase tracking-[0.2em] opacity-40">${brand.location}</span>
-                            <span class="text-[9px] font-mono uppercase tracking-[0.1em] opacity-30 mt-2">${brand.price}</span>
-                        </div>
-                        
                     </a>
                 `;
-                container.insertAdjacentHTML('beforeend', row);
+                rightContent.appendChild(section);
+            });
+
+            // 3. LANCER L'OBSERVATEUR POUR LE MENU DÉFILANT
+            setupScrollObserver();
+        }
+
+        // Fonction magique qui met en surbrillance le menu de gauche quand on scroll à droite
+        function setupScrollObserver() {
+            const menuBtns = document.querySelectorAll('.menu-btn');
+            
+            // L'observateur regarde quelle section est au milieu de l'écran
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // On réinitialise tous les boutons du menu
+                        menuBtns.forEach(btn => {
+                            btn.classList.remove('opacity-100', 'font-bold', 'translate-x-2');
+                            btn.classList.add('opacity-30');
+                        });
+                        
+                        // On active le bon bouton
+                        const activeId = entry.target.id.replace('brand-', 'menu-');
+                        const activeBtn = document.getElementById(activeId);
+                        if (activeBtn) {
+                            activeBtn.classList.remove('opacity-30');
+                            activeBtn.classList.add('opacity-100', 'font-bold', 'translate-x-2');
+                            
+                            // On fait défiler le menu de gauche pour suivre l'utilisateur
+                            activeBtn.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                    }
+                });
+            }, { 
+                root: null, 
+                rootMargin: '-40% 0px -40% 0px', // Se déclenche quand l'image est au milieu de l'écran
+                threshold: 0 
+            });
+
+            // On observe chaque image
+            document.querySelectorAll('.brand-section').forEach(section => {
+                observer.observe(section);
             });
         }
 
+        // Gérer la recherche
         document.getElementById('searchInput').addEventListener('input', (e) => {
             const query = e.target.value.toLowerCase();
             const filteredBrands = brandsData.filter(brand => {
                 return brand.name.toLowerCase().includes(query) || 
                        brand.style.toLowerCase().includes(query) ||
-                       brand.location.toLowerCase().includes(query) ||
-                       brand.commitments.join(" ").toLowerCase().includes(query);
+                       brand.location.toLowerCase().includes(query);
             });
             displayResults(filteredBrands);
         });
