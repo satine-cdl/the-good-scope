@@ -1,0 +1,138 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2870
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww28600\viewh14820\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 <!DOCTYPE html>\
+<html class="light" lang="en">\
+<head>\
+    <meta charset="utf-8"/>\
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>\
+    <title>THE SCOPE - Archive</title>\
+    <script src="https://cdn.tailwindcss.com"></script>\
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>\
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>\
+    \
+    <script>\
+        tailwind.config = \{\
+            theme: \{\
+                extend: \{\
+                    colors: \{\
+                        background: "#F9FAFF",\
+                        primary: "#000000",\
+                        outline: "#747878",\
+                        "accent-blue": "#CFDEEB",\
+                        "accent-pink": "#F9B9EE",\
+                        "accent-yellow": "#F5F074"\
+                    \},\
+                    fontFamily: \{\
+                        "mono-data": ["JetBrains Mono", "monospace"],\
+                        "display": ["Inter", "sans-serif"],\
+                    \}\
+                \}\
+            \}\
+        \}\
+    </script>\
+    <style>\
+        body \{ background-color: theme('colors.background'); color: theme('colors.primary'); \}\
+        .grid-bg \{\
+            background-size: 25% 100%, 100% 25%;\
+            background-image: \
+                linear-gradient(to right, theme('colors.outline') 1px, transparent 1px),\
+                linear-gradient(to bottom, theme('colors.outline') 1px, transparent 1px);\
+            background-position: center top;\
+            opacity: 0.15;\
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none;\
+        \}\
+    </style>\
+</head>\
+\
+<body class="min-h-screen relative overflow-x-hidden font-display flex flex-col items-center">\
+    <div class="grid-bg"></div>\
+\
+    <nav class="w-full flex justify-between items-center px-10 py-6 z-50 border-b border-primary">\
+        <div class="text-2xl tracking-tighter uppercase font-mono-data">ARCHIVE_01</div>\
+        <div class="flex items-center gap-4">\
+            <span class="material-symbols-outlined cursor-crosshair">photo_camera</span>\
+        </div>\
+    </nav>\
+\
+    <main class="w-full max-w-3xl flex flex-col items-center justify-center z-20 text-center mt-24 px-6">\
+        <h1 class="text-6xl tracking-tighter mb-12 uppercase mix-blend-multiply font-thin">The Scope</h1>\
+        \
+        <div class="w-full relative group">\
+            <input id="searchInput" class="w-full bg-transparent border-0 border-b border-primary focus:ring-0 focus:border-primary font-mono-data text-center px-0 py-3 transition-all outline-none" placeholder="QUERY ARCHIVE (ex: streetwear, bio, denim)..." type="text"/>\
+            \
+            <button id="imageSearchBtn" class="absolute right-0 bottom-3 opacity-50 hover:opacity-100 transition-opacity">\
+                <span class="material-symbols-outlined">center_focus_weak</span>\
+            </button>\
+        </div>\
+    </main>\
+\
+    <section id="resultsContainer" class="w-full max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-8 mt-16 px-6 z-20 pb-24">\
+        </section>\
+\
+    <script>\
+        let brandsData = [];\
+\
+        // 1. Charger la base de donn\'e9es au d\'e9marrage\
+        async function loadDatabase() \{\
+            try \{\
+                const response = await fetch('brands.json');\
+                brandsData = await response.json();\
+                displayResults(brandsData); // Affiche tout par d\'e9faut\
+            \} catch (error) \{\
+                console.error("Erreur de chargement des donn\'e9es:", error);\
+                document.getElementById('resultsContainer').innerHTML = "<p class='font-mono-data text-red-500'>* SYSTEM ERROR: DATABASE OFFLINE *</p>";\
+            \}\
+        \}\
+\
+        // 2. Afficher les r\'e9sultats sous forme de cartes "Zine"\
+        function displayResults(brands) \{\
+            const container = document.getElementById('resultsContainer');\
+            container.innerHTML = ''; // On vide le conteneur\
+\
+            if (brands.length === 0) \{\
+                container.innerHTML = "<p class='col-span-2 text-center font-mono-data'>NO MATCH FOUND IN ARCHIVE.</p>";\
+                return;\
+            \}\
+\
+            brands.forEach(brand => \{\
+                const card = `\
+                    <div class="border border-primary bg-white p-4 shadow-[4px_4px_0px_0px_#000] hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_#000] transition-all cursor-crosshair flex flex-col">\
+                        <img src="$\{brand.image_url\}" alt="$\{brand.name\}" class="w-full h-48 object-cover grayscale hover:grayscale-0 transition-all border border-primary mb-4" />\
+                        <div class="flex justify-between items-start mb-2">\
+                            <h2 class="text-2xl font-bold uppercase tracking-tighter">$\{brand.name\}</h2>\
+                            <span class="font-mono-data text-sm bg-accent-yellow px-2 py-1 border border-primary">$\{brand.price\}</span>\
+                        </div>\
+                        <p class="font-mono-data text-sm mb-4 uppercase opacity-70">$\{brand.style\} // $\{brand.location\}</p>\
+                        <div class="mt-auto flex flex-wrap gap-2">\
+                            $\{brand.commitments.map(c => `<span class="text-xs font-mono-data border border-primary px-1 bg-accent-blue">$\{c\}</span>`).join('')\}\
+                        </div>\
+                    </div>\
+                `;\
+                container.insertAdjacentHTML('beforeend', card);\
+            \});\
+        \}\
+\
+        // 3. \'c9couter ce que l'utilisateur tape dans la barre de recherche\
+        document.getElementById('searchInput').addEventListener('input', (e) => \{\
+            const query = e.target.value.toLowerCase();\
+            \
+            // On filtre les marques dont le nom, le style ou les engagements contiennent le mot tap\'e9\
+            const filteredBrands = brandsData.filter(brand => \{\
+                return brand.name.toLowerCase().includes(query) || \
+                       brand.style.toLowerCase().includes(query) ||\
+                       brand.commitments.join(" ").toLowerCase().includes(query);\
+            \});\
+            \
+            displayResults(filteredBrands);\
+        \});\
+\
+        // 4. Lancer le chargement\
+        loadDatabase();\
+    </script>\
+</body>\
+</html>}
