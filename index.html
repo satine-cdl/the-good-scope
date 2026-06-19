@@ -6,16 +6,16 @@
     <title>THE SCOPE - Archive</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,800;1,400&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet"/>
     
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        background: "#EBEBEB",
+                        background: "#FAFAFA",
                         primary: "#111111",
-                        accent: "#F9B9EE",
+                        accent: "#F9B9EE", // Le rose
                     },
                     fontFamily: {
                         "serif": ["Playfair Display", "serif"],
@@ -26,73 +26,69 @@
         }
     </script>
     <style>
-        body { 
-            background-color: theme('colors.background'); 
-            color: theme('colors.primary'); 
-        }
+        body { background-color: theme('colors.background'); color: theme('colors.primary'); }
+        /* Grille à pois subtile */
         .dot-grid {
-            background-image: radial-gradient(theme('colors.primary') 1px, transparent 1px);
-            background-size: 32px 32px;
-            opacity: 0.15;
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none;
+            background-image: radial-gradient(#111111 1px, transparent 1px);
+            background-size: 24px 24px;
+            opacity: 0.1;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
         }
-        ::-webkit-scrollbar { width: 0px; }
+        /* Design brutaliste pour les cartes */
+        .magazine-card {
+            border: 1px solid #111111;
+            transition: all 0.3s ease;
+        }
+        .magazine-card:hover {
+            background-color: #111111;
+            color: #FAFAFA;
+            transform: translateY(-5px);
+            box-shadow: 8px 8px 0px 0px #F9B9EE;
+        }
+        .magazine-card:hover img { filter: grayscale(0%); }
     </style>
 </head>
 
-<body class="min-h-screen relative overflow-x-hidden font-sans selection:bg-accent selection:text-primary">
+<body class="min-h-screen relative overflow-x-hidden font-sans">
     <div class="dot-grid"></div>
 
-    <!-- Navigation Editoriale -->
-    <nav class="w-full flex justify-between items-center px-8 py-8 z-50 fixed top-0 mix-blend-difference text-white pointer-events-none">
-        
-        <!-- Logo / Left -->
-        <div class="text-sm tracking-widest uppercase pointer-events-auto cursor-pointer hover:opacity-50 transition-opacity">
-            ARCHIVE_01
+    <!-- Navigation Editoriale (Toujours visible) -->
+    <nav class="w-full flex flex-col md:flex-row justify-between items-center px-8 py-6 z-50 fixed top-0 bg-background/90 backdrop-blur-md border-b border-primary">
+        <div class="text-xl font-serif font-bold tracking-widest uppercase mb-4 md:mb-0">
+            THE SCOPE
         </div>
 
-        <!-- Menu Links / Center (Caché sur mobile) -->
-        <div class="hidden md:flex gap-10 pointer-events-auto">
-            <a href="#" class="text-[10px] tracking-[0.2em] uppercase hover:italic hover:opacity-70 transition-all">The Index</a>
-            <a href="#" class="text-[10px] tracking-[0.2em] uppercase hover:italic hover:opacity-70 transition-all border-b border-white pb-1">The Scope</a>
-            <a href="#" class="text-[10px] tracking-[0.2em] uppercase hover:italic hover:opacity-70 transition-all">Ecosystem</a>
-            <a href="#" class="text-[10px] tracking-[0.2em] uppercase hover:italic hover:opacity-70 transition-all">Traceability</a>
-            <a href="#" class="text-[10px] tracking-[0.2em] uppercase hover:italic hover:opacity-70 transition-all">Contribute</a>
+        <!-- Les catégories -->
+        <div class="flex flex-wrap justify-center gap-6 md:gap-10">
+            <a href="#" class="text-xs tracking-[0.2em] uppercase hover:text-accent transition-colors font-medium border-b border-primary pb-1">The Index</a>
+            <a href="#" class="text-xs tracking-[0.2em] uppercase hover:text-accent transition-colors font-medium">Ecosystem</a>
+            <a href="#" class="text-xs tracking-[0.2em] uppercase hover:text-accent transition-colors font-medium">Traceability</a>
+            <a href="#" class="text-xs tracking-[0.2em] uppercase hover:text-accent transition-colors font-medium">Contribute</a>
         </div>
-
-        <!-- Vol / Right (Caché sur mobile) -->
-        <div class="text-xs tracking-widest text-right hidden md:block">
-            VOL. I
-        </div>
-
-        <!-- Menu Burger / Mobile -->
-        <div class="md:hidden pointer-events-auto cursor-pointer">
-            <span class="material-symbols-outlined">menu</span>
-        </div>
-
     </nav>
 
     <!-- Header / Typographie Géante -->
-    <main class="w-full flex flex-col items-center justify-center z-20 mt-40 md:mt-48 px-6 relative">
-        <h1 class="text-[14vw] leading-[0.8] font-serif tracking-tighter uppercase text-center flex flex-col items-center">
-            <span>The</span>
-            <span class="italic ml-12 md:ml-32 text-accent mix-blend-multiply">Scope</span>
+    <main class="w-full flex flex-col items-center justify-center z-20 mt-48 px-6 mb-24">
+        <h1 class="text-[15vw] leading-[0.8] font-serif tracking-tighter uppercase text-center flex flex-col items-center">
+            <span class="font-bold">THE</span>
+            <span class="italic text-accent">SCOPE</span>
         </h1>
         
-        <!-- Mots flottants style magazine -->
-        <div class="absolute top-1/2 left-10 hidden lg:block text-xs uppercase tracking-[0.3em] rotate-90 origin-left opacity-50">Independent</div>
-        <div class="absolute bottom-0 right-10 hidden lg:block text-xs uppercase tracking-[0.3em] -rotate-90 origin-right opacity-50">Fashion Directory</div>
+        <p class="mt-12 text-sm uppercase tracking-[0.3em] font-medium text-center max-w-lg">
+            Independent Fashion Directory.<br>Highlighting brands that respect the environment and human rights.
+        </p>
 
         <!-- Barre de recherche -->
-        <div class="w-full max-w-xl relative group mt-24">
-            <input id="searchInput" class="w-full bg-transparent border-0 border-b border-primary/30 focus:ring-0 focus:border-primary font-sans text-center text-sm tracking-widest px-0 py-4 transition-all outline-none placeholder:text-primary/30 uppercase" placeholder="Search archive..." type="text"/>
-            <span class="material-symbols-outlined absolute right-0 bottom-4 opacity-30">search</span>
+        <div class="w-full max-w-2xl relative group mt-16 border-2 border-primary bg-white">
+            <input id="searchInput" class="w-full bg-transparent border-none focus:ring-0 font-sans text-center text-sm tracking-widest px-6 py-5 outline-none placeholder:text-primary/40 uppercase" placeholder="SEARCH (ex: denim, vegan, UK)..." type="text"/>
+            <span class="material-symbols-outlined absolute right-4 bottom-5 opacity-50">search</span>
         </div>
     </main>
 
-    <!-- Grille déstructurée des résultats -->
-    <section id="resultsContainer" class="w-full max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-24 mt-32 px-6 z-20 pb-32">
-        <!-- Les cartes s'afficheront ici -->
+    <!-- Grille des résultats -->
+    <!-- On utilise tag <a> directement dans le JS pour que toute la carte soit cliquable -->
+    <section id="resultsContainer" class="w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-6 z-20 pb-32">
+        <!-- Cartes générées par le JS -->
     </section>
 
     <script>
@@ -105,7 +101,7 @@
                 displayResults(brandsData);
             } catch (error) {
                 console.error("Erreur:", error);
-                document.getElementById('resultsContainer').innerHTML = "<p class='col-span-2 text-center text-red-500 uppercase tracking-widest mt-12'>Database offline.</p>";
+                document.getElementById('resultsContainer').innerHTML = "<p class='col-span-full text-center text-red-500 uppercase tracking-widest mt-12 border border-red-500 p-4'>Database offline.</p>";
             }
         }
 
@@ -114,31 +110,37 @@
             container.innerHTML = ''; 
 
             if (brands.length === 0) {
-                container.innerHTML = "<p class='col-span-2 text-center text-3xl font-serif italic text-primary/50 mt-12'>Nothing found.</p>";
+                container.innerHTML = "<p class='col-span-full text-center text-2xl font-serif italic text-primary/50 mt-12'>No matching brand found in the archive.</p>";
                 return;
             }
 
-            brands.forEach((brand, index) => {
-                const staggeredClass = index % 2 !== 0 ? 'md:mt-32' : '';
-
+            brands.forEach(brand => {
+                // Remarque : La balise <a> englobe tout, donc un clic n'importe où ouvre le site !
                 const card = `
-                    <div class="group relative flex flex-col ${staggeredClass}">
-                        <div class="relative overflow-hidden w-full aspect-[4/5] bg-gray-200 cursor-crosshair">
-                            <img src="${brand.image_url}" alt="${brand.name}" class="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-700 ease-in-out group-hover:scale-105" />
+                    <a href="${brand.website}" target="_blank" rel="noopener noreferrer" class="magazine-card group flex flex-col bg-white cursor-pointer overflow-hidden relative">
+                        <div class="relative w-full aspect-[4/5] border-b border-primary bg-gray-100 overflow-hidden">
+                            <img src="${brand.image_url}" alt="${brand.name}" class="w-full h-full object-cover grayscale transition-all duration-500 group-hover:scale-105" />
                             
-                            <div class="absolute top-4 left-4 flex flex-col gap-1 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
-                                ${brand.commitments.map(c => `<span class="text-[10px] uppercase tracking-widest bg-white/90 text-black px-2 py-1 backdrop-blur-sm">${c}</span>`).join('')}
+                            <div class="absolute top-4 left-4 flex flex-col gap-2 z-10">
+                                ${brand.commitments.map(c => `<span class="text-[9px] uppercase tracking-widest bg-primary text-white px-2 py-1">${c}</span>`).join('')}
                             </div>
                         </div>
                         
-                        <div class="mt-6 flex flex-col gap-1">
-                            <div class="flex justify-between items-baseline">
-                                <h2 class="text-4xl font-serif uppercase tracking-tight">${brand.name}</h2>
-                                <span class="text-[10px] uppercase tracking-widest border border-primary/20 px-2 py-1 rounded-full">${brand.price}</span>
+                        <div class="p-6 flex flex-col flex-grow justify-between">
+                            <div>
+                                <div class="flex justify-between items-start mb-2">
+                                    <h2 class="text-3xl font-serif uppercase tracking-tight font-bold group-hover:text-accent transition-colors">${brand.name}</h2>
+                                    <span class="text-[10px] uppercase tracking-widest border border-current px-2 py-1">${brand.price}</span>
+                                </div>
+                                <p class="text-xs uppercase tracking-widest opacity-70">${brand.style}</p>
                             </div>
-                            <p class="text-[10px] uppercase tracking-widest text-primary/60 mt-2">${brand.style} — ${brand.location}</p>
+                            
+                            <div class="mt-8 flex justify-between items-center pt-4 border-t border-current opacity-50 group-hover:opacity-100">
+                                <span class="text-[10px] uppercase tracking-widest">${brand.location}</span>
+                                <span class="material-symbols-outlined text-sm">arrow_outward</span>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 `;
                 container.insertAdjacentHTML('beforeend', card);
             });
@@ -149,6 +151,7 @@
             const filteredBrands = brandsData.filter(brand => {
                 return brand.name.toLowerCase().includes(query) || 
                        brand.style.toLowerCase().includes(query) ||
+                       brand.location.toLowerCase().includes(query) ||
                        brand.commitments.join(" ").toLowerCase().includes(query);
             });
             displayResults(filteredBrands);
