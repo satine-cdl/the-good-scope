@@ -98,5 +98,905 @@
     "website": "https://sheepinc.com",
     "commitments": ["Bilan carbone négatif", "Laine traçable"],
     "image_url": "https://images.unsplash.com/photo-1624458319119-915002b85e05?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "011",
+    "name": "Organic Basics",
+    "style": "Basiques / Underwear",
+    "price": "€€",
+    "location": "Danemark",
+    "website": "https://organicbasics.com",
+    "commitments": ["Fibres recyclées", "Usines certifiées"],
+    "image_url": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "012",
+    "name": "Girlfriend Collective",
+    "style": "Activewear Inclusif",
+    "price": "€€",
+    "location": "États-Unis",
+    "website": "https://girlfriend.com",
+    "commitments": ["Bouteilles plastiques recyclées", "Inclusivité des tailles"],
+    "image_url": "https://images.unsplash.com/photo-1518002171953-a080ee817e1f?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "013",
+    "name": "Lucy & Yak",
+    "style": "Casual / Salopettes",
+    "price": "€€",
+    "location": "Royaume-Uni",
+    "website": "https://lucyandyak.com",
+    "commitments": ["Salaires vitaux", "Énergie solaire", "Teintures Low Impact"],
+    "image_url": "https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "014",
+    "name": "Kotn",
+    "style": "Basiques Élégants",
+    "price": "€€",
+    "location": "Canada",
+    "website": "https://kotn.com",
+    "commitments": ["Coton égyptien traçable", "Construction d'écoles"],
+    "image_url": "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "015",
+    "name": "People Tree",
+    "style": "Mode Équitable",
+    "price": "€€",
+    "location": "Royaume-Uni",
+    "website": "https://www.peopletree.co.uk",
+    "commitments": ["Pionnier Fair Trade", "Artisanat traditionnel"],
+    "image_url": "https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "016",
+    "name": "Colorful Standard",
+    "style": "Basiques Colorés",
+    "price": "€€",
+    "location": "Danemark",
+    "website": "https://colorfulstandard.com",
+    "commitments": ["Fabrication européenne", "Zéro déchet", "Teintures écologiques"],
+    "image_url": "https://images.unsplash.com/photo-1520975954732-57dd22299614?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "017",
+    "name": "Thinking MU",
+    "style": "Casual Graphique",
+    "price": "€€",
+    "location": "Espagne",
+    "website": "https://thinkingmu.com",
+    "commitments": ["Chanvre", "Coton Bio", "Pigments biodégradables"],
+    "image_url": "https://images.unsplash.com/photo-1551232864-3f0890e580d9?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "018",
+    "name": "Ecoalf",
+    "style": "Outerwear / Tech",
+    "price": "€€€",
+    "location": "Espagne",
+    "website": "https://ecoalf.com",
+    "commitments": ["Nylon recyclé des océans", "Certification B-Corp"],
+    "image_url": "https://images.unsplash.com/photo-1544441893-675973e31985?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "019",
+    "name": "Jan 'n June",
+    "style": "Minimaliste Modulaire",
+    "price": "€€",
+    "location": "Allemagne",
+    "website": "https://jannjune.com",
+    "commitments": ["Passeport produit écologique", "Production locale (Pologne)"],
+    "image_url": "https://images.unsplash.com/photo-1550639525-c97d455acf70?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "020",
+    "name": "Kings of Indigo",
+    "style": "Denim / Héritage",
+    "price": "€€€",
+    "location": "Pays-Bas",
+    "website": "https://www.kingsofindigo.com",
+    "commitments": ["Denim sans produits chimiques", "Vegan"],
+    "image_url": "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "021",
+    "name": "Rapanui",
+    "style": "Streetwear Surf",
+    "price": "€",
+    "location": "Royaume-Uni",
+    "website": "https://rapanuiclothing.com",
+    "commitments": ["Usine à énergie renouvelable", "Retour pour recyclage"],
+    "image_url": "https://images.unsplash.com/photo-1489987707023-af614cbb0f5a?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "022",
+    "name": "Finisterre",
+    "style": "Outdoor / Surf",
+    "price": "€€€",
+    "location": "Royaume-Uni",
+    "website": "https://finisterre.com",
+    "commitments": ["Protection des océans", "Sans PFC", "Réparations"],
+    "image_url": "https://images.unsplash.com/photo-1504198458649-3128b932f49e?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "023",
+    "name": "Olderbrother",
+    "style": "Gender-neutral / Avant-garde",
+    "price": "€€€",
+    "location": "États-Unis",
+    "website": "https://olderbrother.us",
+    "commitments": ["Teintures aux champignons", "Matières organiques"],
+    "image_url": "https://images.unsplash.com/photo-1485230895905-ef0ddfbdc7cd?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "024",
+    "name": "MATE the Label",
+    "style": "Loungewear Clean",
+    "price": "€€",
+    "location": "États-Unis",
+    "website": "https://matethelabel.com",
+    "commitments": ["Sans plastique", "Non-toxique", "Femmes fondatrices"],
+    "image_url": "https://images.unsplash.com/photo-1516762689617-e1cffcef479d?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "025",
+    "name": "Whimsy + Row",
+    "style": "Féminin / Vintage",
+    "price": "€€€",
+    "location": "États-Unis",
+    "website": "https://whimsyandrow.com",
+    "commitments": ["Éditions limitées", "Tissus recyclés", "Fabrication locale"],
+    "image_url": "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "026",
+    "name": "Boyish Jeans",
+    "style": "Denim Vintage",
+    "price": "€€€",
+    "location": "États-Unis",
+    "website": "https://www.boyish.com",
+    "commitments": ["1/3 de l'eau habituelle", "Vegan", "Énergie propre"],
+    "image_url": "https://images.unsplash.com/photo-1582552938357-02b93e08d667?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "027",
+    "name": "Afends",
+    "style": "Streetwear Alternatif",
+    "price": "€€",
+    "location": "Australie",
+    "website": "https://afends.com",
+    "commitments": ["Révolution du chanvre", "100% Solaire en usine"],
+    "image_url": "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "028",
+    "name": "WAWWA",
+    "style": "Streetwear Utilitaire",
+    "price": "€€",
+    "location": "Royaume-Uni",
+    "website": "https://wawwaclothing.com",
+    "commitments": ["1 acheté = 1 donné", "Usine locale interne", "Salaire juste"],
+    "image_url": "https://images.unsplash.com/photo-1509319117193-57bab727e09d?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "029",
+    "name": "Dedicated",
+    "style": "Streetwear Graphique",
+    "price": "€€",
+    "location": "Suède",
+    "website": "https://www.dedicatedbrand.com",
+    "commitments": ["Certifié Fairtrade", "Polyester recyclé (PET)"],
+    "image_url": "https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "030",
+    "name": "Plant Faced Clothing",
+    "style": "Vegan Streetwear",
+    "price": "€€",
+    "location": "Royaume-Uni",
+    "website": "https://plantfacedclothing.com",
+    "commitments": ["100% Vegan", "Encre à l'eau", "Emballages recyclés"],
+    "image_url": "https://images.unsplash.com/photo-1485968579580-b6d095142e6e?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "031",
+    "name": "Outland Denim",
+    "style": "Denim",
+    "price": "€€€",
+    "location": "Australie",
+    "website": "https://www.outlanddenim.com",
+    "commitments": ["Réinsertion sociale", "Coton organique", "Transparence"],
+    "image_url": "https://images.unsplash.com/photo-1542272604-787c3835535d?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "032",
+    "name": "Triarchy",
+    "style": "Denim Premium",
+    "price": "€€€",
+    "location": "États-Unis",
+    "website": "https://triarchy.com",
+    "commitments": ["Lavage sans eau", "Boutons sans plastique"],
+    "image_url": "https://images.unsplash.com/photo-1602293589930-45aad59ba3ab?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "033",
+    "name": "Kuyichi",
+    "style": "Denim / Casual",
+    "price": "€€",
+    "location": "Pays-Bas",
+    "website": "https://kuyichi.com",
+    "commitments": ["Vegan", "Coton recyclé", "Condition de travail"],
+    "image_url": "https://images.unsplash.com/photo-1582552938357-02b93e08d667?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "034",
+    "name": "Hiut Denim",
+    "style": "Denim Artisanal",
+    "price": "€€€",
+    "location": "Pays de Galles",
+    "website": "https://hiutdenim.co.uk",
+    "commitments": ["Fait main", "Réparations gratuites", "Slow Fashion"],
+    "image_url": "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "035",
+    "name": "HNST",
+    "style": "Denim Circulaire",
+    "price": "€€",
+    "location": "Belgique",
+    "website": "https://www.letshnst.com",
+    "commitments": ["56% de coton recyclé", "Microplastiques évités"],
+    "image_url": "https://images.unsplash.com/photo-1542272604-787c3835535d?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "036",
+    "name": "Brava Fabrics",
+    "style": "Casual Graphique",
+    "price": "€€",
+    "location": "Espagne",
+    "website": "https://bravafabrics.com",
+    "commitments": ["Production européenne", "Viscose EcoVero"],
+    "image_url": "https://images.unsplash.com/photo-1520975954732-57dd22299614?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "037",
+    "name": "TwoThirds",
+    "style": "Surf / Ocean",
+    "price": "€€",
+    "location": "Espagne",
+    "website": "https://twothirds.com",
+    "commitments": ["Protection des océans", "Pré-commande (Zéro déchet)"],
+    "image_url": "https://images.unsplash.com/photo-1504198458649-3128b932f49e?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "038",
+    "name": "Honest Basics",
+    "style": "Basiques Accessibles",
+    "price": "€",
+    "location": "Allemagne",
+    "website": "https://www.honest-basics.com",
+    "commitments": ["Certifié GOTS", "Prix abordables"],
+    "image_url": "https://images.unsplash.com/photo-1588099768531-a72d4a198538?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "039",
+    "name": "Pact",
+    "style": "Basiques / Loungewear",
+    "price": "€€",
+    "location": "États-Unis",
+    "website": "https://wearpact.com",
+    "commitments": ["Coton bio", "Fair Trade Certified"],
+    "image_url": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "040",
+    "name": "Tentree",
+    "style": "Outdoor Casual",
+    "price": "€€",
+    "location": "Canada",
+    "website": "https://www.tentree.com",
+    "commitments": ["10 arbres plantés par article", "B-Corp"],
+    "image_url": "https://images.unsplash.com/photo-1509319117193-57bab727e09d?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "041",
+    "name": "Boody",
+    "style": "Sous-vêtements / Basiques",
+    "price": "€",
+    "location": "Australie",
+    "website": "https://boody.com",
+    "commitments": ["Bambou cultivé bio", "Sans pesticides"],
+    "image_url": "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "042",
+    "name": "For Days",
+    "style": "Streetwear Circulaire",
+    "price": "€€",
+    "location": "États-Unis",
+    "website": "https://fordays.com",
+    "commitments": ["Système de consigne (Take Back)", "100% Recyclable"],
+    "image_url": "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "043",
+    "name": "Cariuma",
+    "style": "Sneakers / Skate",
+    "price": "€€",
+    "location": "Brésil",
+    "website": "https://cariuma.com",
+    "commitments": ["Reboisement (2 arbres plantés)", "Matériaux alternatifs"],
+    "image_url": "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "044",
+    "name": "Womsh",
+    "style": "Sneakers Premium",
+    "price": "€€€",
+    "location": "Italie",
+    "website": "https://womsh.com",
+    "commitments": ["Cuir de pomme (Vegan)", "Production italienne"],
+    "image_url": "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "045",
+    "name": "Flamingos Life",
+    "style": "Sneakers Retro",
+    "price": "€€",
+    "location": "Espagne",
+    "website": "https://www.flamingoslife.com",
+    "commitments": ["Plastique océanique", "Vegan", "Biodégradable"],
+    "image_url": "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "046",
+    "name": "Saye",
+    "style": "Sneakers Vintage",
+    "price": "€€",
+    "location": "Espagne",
+    "website": "https://www.sayebrand.com",
+    "commitments": ["Cuirs biosourcés (mangue, maïs)", "Reboisement"],
+    "image_url": "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "047",
+    "name": "MoEa",
+    "style": "Sneakers Colorées",
+    "price": "€€",
+    "location": "France",
+    "website": "https://moea.com",
+    "commitments": ["Biomatériaux (Raisin, Cactus)", "Faible émission carbone"],
+    "image_url": "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "048",
+    "name": "Good Guys Don't Wear Leather",
+    "style": "Chaussures Vegan",
+    "price": "€€",
+    "location": "France",
+    "website": "https://goodguysdontwearleather.com",
+    "commitments": ["Pionnier Vegan", "Production équitable au Portugal"],
+    "image_url": "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "049",
+    "name": "Will's Vegan Store",
+    "style": "Chaussures / Accessoires",
+    "price": "€€",
+    "location": "Royaume-Uni",
+    "website": "https://wills-vegan-store.com",
+    "commitments": ["Carbone neutre", "100% Vegan", "Emballage sans plastique"],
+    "image_url": "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "050",
+    "name": "TALA",
+    "style": "Activewear Inclusif",
+    "price": "€€",
+    "location": "Royaume-Uni",
+    "website": "https://www.wearetala.com",
+    "commitments": ["Fibres recyclées", "Transparence totale des usines"],
+    "image_url": "https://images.unsplash.com/photo-1518002171953-a080ee817e1f?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "051",
+    "name": "Tripulse",
+    "style": "Activewear",
+    "price": "€€",
+    "location": "Suède",
+    "website": "https://tripulse.co",
+    "commitments": ["Zéro plastique (Tencel)", "Anti-bactérien naturel"],
+    "image_url": "https://images.unsplash.com/photo-1518002171953-a080ee817e1f?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "052",
+    "name": "Iron Roots",
+    "style": "Activewear Performance",
+    "price": "€€",
+    "location": "Pays-Bas",
+    "website": "https://ironroots.com",
+    "commitments": ["Microplastiques évités", "Chanvre et Eucalyptus"],
+    "image_url": "https://images.unsplash.com/photo-1518002171953-a080ee817e1f?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "053",
+    "name": "SOS Activewear",
+    "style": "Activewear",
+    "price": "€€",
+    "location": "Royaume-Uni",
+    "website": "https://sosactivewear.com",
+    "commitments": ["Nylon régénéré (ECONYL)", "Océans propres"],
+    "image_url": "https://images.unsplash.com/photo-1518002171953-a080ee817e1f?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "054",
+    "name": "Presca",
+    "style": "Vêtements de Cyclisme",
+    "price": "€€€",
+    "location": "Royaume-Uni",
+    "website": "https://prescasportswear.com",
+    "commitments": ["Circulaire", "Réparations garanties"],
+    "image_url": "https://images.unsplash.com/photo-1518002171953-a080ee817e1f?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "055",
+    "name": "Stay Wild",
+    "style": "Maillots de bain",
+    "price": "€€€",
+    "location": "Royaume-Uni",
+    "website": "https://staywildswim.com",
+    "commitments": ["Plastique des océans", "Fabrication locale (Londres)"],
+    "image_url": "https://images.unsplash.com/photo-1550614000-4b95dd24dc29?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "056",
+    "name": "Batoko",
+    "style": "Maillots de bain Fun",
+    "price": "€€",
+    "location": "Royaume-Uni",
+    "website": "https://www.batoko.com",
+    "commitments": ["Déchets marins recyclés", "Petites séries"],
+    "image_url": "https://images.unsplash.com/photo-1550614000-4b95dd24dc29?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "057",
+    "name": "Ruby Moon",
+    "style": "Swim / Active",
+    "price": "€€",
+    "location": "Royaume-Uni",
+    "website": "https://rubymoon.org.uk",
+    "commitments": ["Microcrédit pour femmes", "Circulaire"],
+    "image_url": "https://images.unsplash.com/photo-1550614000-4b95dd24dc29?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "058",
+    "name": "Deakin and Blue",
+    "style": "Maillots de bain Inclusifs",
+    "price": "€€€",
+    "location": "Royaume-Uni",
+    "website": "https://www.deakinandblue.com",
+    "commitments": ["Econyl", "Soutien morphologique", "Production UK"],
+    "image_url": "https://images.unsplash.com/photo-1550614000-4b95dd24dc29?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "059",
+    "name": "Bode",
+    "style": "Avant-garde / Héritage",
+    "price": "€€€€",
+    "location": "États-Unis",
+    "website": "https://bodenewyork.com",
+    "commitments": ["Tissus antiques", "Upcycling haut de gamme"],
+    "image_url": "https://images.unsplash.com/photo-1485230895905-ef0ddfbdc7cd?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "060",
+    "name": "Collina Strada",
+    "style": "Créateur / Éclectique",
+    "price": "€€€€",
+    "location": "États-Unis",
+    "website": "https://collinastrada.com",
+    "commitments": ["Deadstock", "Militantisme climatique", "Transparence"],
+    "image_url": "https://images.unsplash.com/photo-1485230895905-ef0ddfbdc7cd?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "061",
+    "name": "Ahluwalia",
+    "style": "Créateur / Vintage",
+    "price": "€€€€",
+    "location": "Royaume-Uni",
+    "website": "https://ahluwalia.world",
+    "commitments": ["Upcycling", "Héritage multiculturel"],
+    "image_url": "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "062",
+    "name": "Bethany Williams",
+    "style": "Créateur Engagé",
+    "price": "€€€€",
+    "location": "Royaume-Uni",
+    "website": "https://bethany-williams.com",
+    "commitments": ["Soutien aux sans-abris", "Matériaux de récupération"],
+    "image_url": "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "063",
+    "name": "Raeburn",
+    "style": "Techwear / Upcycling",
+    "price": "€€€",
+    "location": "Royaume-Uni",
+    "website": "https://www.raeburndesign.co.uk",
+    "commitments": ["Surplus militaires (Parachutes)", "Réparation gratuite"],
+    "image_url": "https://images.unsplash.com/photo-1544441893-675973e31985?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "064",
+    "name": "Maggie Marilyn",
+    "style": "Créateur / Féminin",
+    "price": "€€€€",
+    "location": "Nouvelle-Zélande",
+    "website": "https://maggiemarilyn.com",
+    "commitments": ["Agriculture régénératrice", "B-Corp"],
+    "image_url": "https://images.unsplash.com/photo-1550614000-4b95dd24dc29?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "065",
+    "name": "Mara Hoffman",
+    "style": "Créateur Coloré",
+    "price": "€€€€",
+    "location": "États-Unis",
+    "website": "https://marahoffman.com",
+    "commitments": ["Fibres responsables", "Pratiques équitables"],
+    "image_url": "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "066",
+    "name": "Mother of Pearl",
+    "style": "Créateur Éthique",
+    "price": "€€€",
+    "location": "Royaume-Uni",
+    "website": "https://motherofpearl.co.uk",
+    "commitments": ["Traçabilité depuis le champ", "Matières organiques"],
+    "image_url": "https://images.unsplash.com/photo-1434389670869-c87510ef87f6?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "067",
+    "name": "Ninety Percent",
+    "style": "Basiques de Luxe",
+    "price": "€€€",
+    "location": "Royaume-Uni",
+    "website": "https://ninetypercent.com",
+    "commitments": ["90% des profits reversés", "Matériaux certifiés"],
+    "image_url": "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "068",
+    "name": "Birdsong",
+    "style": "Féminin / Engagé",
+    "price": "€€",
+    "location": "Royaume-Uni",
+    "website": "https://birdsong.london",
+    "commitments": ["Zéro Photoshop", "Fait par des femmes locales (Salaire vital)"],
+    "image_url": "https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "069",
+    "name": "Beaumont Organic",
+    "style": "Minimaliste / Cosy",
+    "price": "€€€",
+    "location": "Royaume-Uni",
+    "website": "https://www.beaumontorganic.com",
+    "commitments": ["Coton bio", "Usines familiales au Portugal"],
+    "image_url": "https://images.unsplash.com/photo-1550639525-c97d455acf70?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "070",
+    "name": "Thought",
+    "style": "Casual Chic",
+    "price": "€€",
+    "location": "Royaume-Uni",
+    "website": "https://www.wearethought.com",
+    "commitments": ["Chanvre", "Bambou", "Slow fashion"],
+    "image_url": "https://images.unsplash.com/photo-1516762689617-e1cffcef479d?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "071",
+    "name": "Komodo",
+    "style": "Streetwear / Casual",
+    "price": "€€",
+    "location": "Royaume-Uni",
+    "website": "https://www.komodo.online",
+    "commitments": ["Pionnier éthique depuis 1988", "Sans plastique"],
+    "image_url": "https://images.unsplash.com/photo-1489987707023-af614cbb0f5a?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "072",
+    "name": "Nomads",
+    "style": "Boho / Imprimés",
+    "price": "€€",
+    "location": "Royaume-Uni",
+    "website": "https://www.nomadsclothing.com",
+    "commitments": ["Artisanat indien", "Commerce équitable (BAFTS)"],
+    "image_url": "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "073",
+    "name": "Eilean",
+    "style": "Artisanal / Minimal",
+    "price": "€€",
+    "location": "Mexique",
+    "website": "https://eileanorganic.com",
+    "commitments": ["Zéro déchet", "Coton mexicain recyclé"],
+    "image_url": "https://images.unsplash.com/photo-1551232864-3f0890e580d9?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "074",
+    "name": "Lanius",
+    "style": "Féminin / Qualité",
+    "price": "€€€",
+    "location": "Allemagne",
+    "website": "https://www.lanius.com",
+    "commitments": ["Fair Wear Foundation", "GOTS", "Vegan"],
+    "image_url": "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "075",
+    "name": "Hessnatur",
+    "style": "Basiques Naturels",
+    "price": "€€",
+    "location": "Allemagne",
+    "website": "https://www.hessnatur.com",
+    "commitments": ["Pionnier de l'écologie", "Microplastiques interdits"],
+    "image_url": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "076",
+    "name": "Wunderwerk",
+    "style": "Moderne Chic",
+    "price": "€€€",
+    "location": "Allemagne",
+    "website": "https://www.wunderwerk.com",
+    "commitments": ["Délavage Denim sans toxines", "Tissus européens"],
+    "image_url": "https://images.unsplash.com/photo-1588099768531-a72d4a198538?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "077",
+    "name": "Knowledge Cotton",
+    "style": "Menswear / Casual",
+    "price": "€€",
+    "location": "Danemark",
+    "website": "https://knowledgecottonapparel.com",
+    "commitments": ["100% Coton Bio depuis 2008", "Neutre en carbone"],
+    "image_url": "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "078",
+    "name": "Dawn Denim",
+    "style": "Denim Fair Trade",
+    "price": "€€",
+    "location": "Allemagne",
+    "website": "https://dawndenim.com",
+    "commitments": ["Leader Fair Wear", "Transparence supply chain"],
+    "image_url": "https://images.unsplash.com/photo-1602293589930-45aad59ba3ab?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "079",
+    "name": "Goodsociety",
+    "style": "Denim Minimaliste",
+    "price": "€€€",
+    "location": "Allemagne",
+    "website": "https://goodsociety.org",
+    "commitments": ["Denim Vegan", "1/4 des profits reversés (Social)"],
+    "image_url": "https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "080",
+    "name": "Rotholz",
+    "style": "Streetwear Japonisant",
+    "price": "€€",
+    "location": "Allemagne",
+    "website": "https://rotholz-store.com",
+    "commitments": ["Design minimaliste", "Fabrication allemande"],
+    "image_url": "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "081",
+    "name": "Bleed Clothing",
+    "style": "Skate / Outdoor",
+    "price": "€€",
+    "location": "Allemagne",
+    "website": "https://www.bleed-clothing.com",
+    "commitments": ["100% Vegan (aucun sang versé)", "Matériaux recyclés"],
+    "image_url": "https://images.unsplash.com/photo-1509319117193-57bab727e09d?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "082",
+    "name": "Recolution",
+    "style": "Streetwear Urbain",
+    "price": "€€",
+    "location": "Allemagne",
+    "website": "https://www.recolution.de",
+    "commitments": ["Coton GOTS", "Production GOTS complète"],
+    "image_url": "https://images.unsplash.com/photo-1487222477894-8943e31ef7b2?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "083",
+    "name": "ThokkThokk",
+    "style": "Graphique / Edgy",
+    "price": "€",
+    "location": "Allemagne",
+    "website": "https://thokkthokkmarket.com",
+    "commitments": ["Soutien aux ONG", "Kapok (duvet végétal)"],
+    "image_url": "https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "084",
+    "name": "Lovjoi",
+    "style": "Féminin / Intimates",
+    "price": "€€",
+    "location": "Allemagne",
+    "website": "https://lovjoi.com",
+    "commitments": ["Soutien aux réfugiés syriens", "Tissus organiques"],
+    "image_url": "https://images.unsplash.com/photo-1550614000-4b95dd24dc29?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "085",
+    "name": "Greenbomb",
+    "style": "Casual Graphique",
+    "price": "€",
+    "location": "Allemagne",
+    "website": "https://www.greenbomb.de",
+    "commitments": ["Encres à eau", "Fibres de hêtre (Modal)"],
+    "image_url": "https://images.unsplash.com/photo-1520975954732-57dd22299614?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "086",
+    "name": "Derbe",
+    "style": "Outerwear / Pluie",
+    "price": "€€",
+    "location": "Allemagne",
+    "website": "https://derbe-hamburg.de",
+    "commitments": ["Vegan (PETA)", "Polyester recyclé certifié"],
+    "image_url": "https://images.unsplash.com/photo-1544441893-675973e31985?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "087",
+    "name": "Elk",
+    "style": "Contemporain Chic",
+    "price": "€€€",
+    "location": "Australie",
+    "website": "https://elkthelabel.com",
+    "commitments": ["Rapport de transparence annuel", "Cuir végétal"],
+    "image_url": "https://images.unsplash.com/photo-1434389670869-c87510ef87f6?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "088",
+    "name": "Spell",
+    "style": "Boho / Robes",
+    "price": "€€€",
+    "location": "Australie",
+    "website": "https://usa.spell.co",
+    "commitments": ["Fibres d'Econyl", "Traçabilité des fournisseurs"],
+    "image_url": "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "089",
+    "name": "Arnhem",
+    "style": "Boho Floral",
+    "price": "€€€",
+    "location": "Australie",
+    "website": "https://arnhem.co",
+    "commitments": ["Fibres cellulosiques durables", "Zéro emballage plastique"],
+    "image_url": "https://images.unsplash.com/photo-1550614000-4b95dd24dc29?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "090",
+    "name": "Auguste The Label",
+    "style": "Vintage Féminin",
+    "price": "€€€",
+    "location": "Australie",
+    "website": "https://augustethelabel.com",
+    "commitments": ["1% For The Planet", "Carbone Positif"],
+    "image_url": "https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "091",
+    "name": "Bassike",
+    "style": "Luxe Décontracté",
+    "price": "€€€€",
+    "location": "Australie",
+    "website": "https://www.bassike.com",
+    "commitments": ["Fabrication australienne locale", "Coton organique certifié"],
+    "image_url": "https://images.unsplash.com/photo-1550639525-c97d455acf70?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "092",
+    "name": "Nobody Denim",
+    "style": "Denim Premium",
+    "price": "€€€",
+    "location": "Australie",
+    "website": "https://nobodydenim.com",
+    "commitments": ["Lavage à faible impact", "Cousu à Melbourne"],
+    "image_url": "https://images.unsplash.com/photo-1582552938357-02b93e08d667?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "093",
+    "name": "Citizen Wolf",
+    "style": "Sur-mesure T-shirts",
+    "price": "€€",
+    "location": "Australie",
+    "website": "https://www.citizenwolf.com",
+    "commitments": ["Fabriqué à la demande", "Ajustement magique", "Zéro stock mort"],
+    "image_url": "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "094",
+    "name": "Bhumi",
+    "style": "Basiques / Activewear",
+    "price": "€€",
+    "location": "Australie",
+    "website": "https://bhumi.com.au",
+    "commitments": ["Coton bio uniquement", "Sans travail des enfants garanti"],
+    "image_url": "https://images.unsplash.com/photo-1518002171953-a080ee817e1f?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "095",
+    "name": "Dorsu",
+    "style": "Basiques / Travail",
+    "price": "€",
+    "location": "Cambodge",
+    "website": "https://dorsu.org",
+    "commitments": ["Deadstock du Cambodge", "Salaires vitaux (Living wage)"],
+    "image_url": "https://images.unsplash.com/photo-1588099768531-a72d4a198538?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "096",
+    "name": "Etiko",
+    "style": "Sneakers / Casual",
+    "price": "€€",
+    "location": "Australie",
+    "website": "https://etiko.com.au",
+    "commitments": ["Fairtrade", "Vegan", "Caoutchouc naturel"],
+    "image_url": "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "097",
+    "name": "Fairing",
+    "style": "Loungewear",
+    "price": "€€",
+    "location": "États-Unis",
+    "website": "https://fairing.com",
+    "commitments": ["Transparence de l'usine", "Fait localement"],
+    "image_url": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "098",
+    "name": "Good Studios",
+    "style": "Minimaliste / Chanvre",
+    "price": "€€€",
+    "location": "Australie",
+    "website": "https://goodstudios.com.au",
+    "commitments": ["100% Chanvre", "Pigments naturels", "Production locale"],
+    "image_url": "https://images.unsplash.com/photo-1434389670869-c87510ef87f6?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "099",
+    "name": "Kuwaii",
+    "style": "Workwear Féminin",
+    "price": "€€€",
+    "location": "Australie",
+    "website": "https://kuwaii.com.au",
+    "commitments": ["Petites séries", "Soutien aux créateurs locaux"],
+    "image_url": "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?q=80&w=800&auto=format&fit=crop"
+  },
+  {
+    "id": "100",
+    "name": "Lois Hazel",
+    "style": "Créateur Circulaire",
+    "price": "€€€",
+    "location": "Australie",
+    "website": "https://loishazel.com",
+    "commitments": ["Deadstock à 100%", "Tissus récupérés", "Production éthique"],
+    "image_url": "https://images.unsplash.com/photo-1485230895905-ef0ddfbdc7cd?q=80&w=800&auto=format&fit=crop"
   }
 ]
