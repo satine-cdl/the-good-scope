@@ -47,7 +47,6 @@
         .visual-img { filter: grayscale(100%); transition: filter 1s ease; }
         .focus-item .visual-img { filter: grayscale(0%); }
 
-        /* Customizing select menus to fit DA */
         select { -webkit-appearance: none; -moz-appearance: none; appearance: none; }
     </style>
 </head>
@@ -58,6 +57,7 @@
         <span class="material-symbols-outlined font-light">arrow_upward</span>
     </button>
 
+    <!-- HEADER NAVIGATION -->
     <nav class="w-full flex justify-between items-center px-6 md:px-12 py-8 z-50 fixed top-0 bg-background/90 backdrop-blur-md border-b border-line">
         <button onclick="showPage('index')" class="text-xl font-display font-light tracking-[0.3em] uppercase transition-opacity hover:opacity-60">
             THE SCOPE
@@ -71,8 +71,10 @@
         </div>
     </nav>
 
+    <!-- CONTENT BACKBONE -->
     <div class="flex-grow">
 
+        <!-- PAGE 1 : THE INDEX -->
         <div id="page-index" class="page-section active pt-32">
             
             <header id="main-header" class="w-full min-h-[60vh] flex flex-col items-center justify-center px-6 transition-all duration-700 ease-in-out">
@@ -89,28 +91,40 @@
                     Exposing sustainable alternative apparel loops. We catalog independent labels respecting environmental and human boundaries to reshape modern consumption awareness.
                 </p>
                 
+                <!-- Core Search Input -->
                 <div class="w-full max-w-xl relative mt-10 group">
                     <input id="searchInput" class="w-full bg-transparent border-0 border-b border-primary/20 focus:border-primary focus:ring-0 font-mono text-center text-[11px] tracking-[0.2em] px-0 py-4 outline-none placeholder:text-primary/30 uppercase transition-colors" placeholder="Type to search independent brands..." type="text"/>
                     <span class="material-symbols-outlined absolute right-0 bottom-4 opacity-30 font-light">search</span>
                 </div>
 
-                <div id="filterPanel" class="flex flex-wrap gap-4 md:gap-8 mt-6 w-full max-w-2xl justify-center text-[9px] font-mono tracking-[0.1em] uppercase opacity-60 transition-all duration-500">
+                <!-- Filters & Sorting (UPDATED) -->
+                <div id="filterPanel" class="flex flex-wrap gap-4 md:gap-8 mt-6 w-full max-w-3xl justify-center text-[9px] font-mono tracking-[0.1em] uppercase opacity-60 transition-all duration-500">
                     
-                    <select id="sortPrice" class="bg-transparent border-b border-primary/20 outline-none pb-1 cursor-pointer focus:border-primary focus:opacity-100 hover:opacity-100 transition-opacity">
+                    <select id="sortData" class="bg-transparent border-b border-primary/20 outline-none pb-1 cursor-pointer focus:border-primary focus:opacity-100 hover:opacity-100 transition-opacity">
                         <option value="none">SORT: DEFAULT</option>
-                        <option value="asc">PRICE: LOW TO HIGH</option>
-                        <option value="desc">PRICE: HIGH TO LOW</option>
+                        <option value="name-asc">NAME: A TO Z</option>
+                        <option value="name-desc">NAME: Z TO A</option>
+                        <option value="price-asc">PRICE: LOW TO HIGH</option>
+                        <option value="price-desc">PRICE: HIGH TO LOW</option>
                     </select>
 
                     <select id="filterCountry" class="bg-transparent border-b border-primary/20 outline-none pb-1 cursor-pointer focus:border-primary focus:opacity-100 hover:opacity-100 transition-opacity max-w-[120px] md:max-w-none">
                         <option value="all">COUNTRY: ALL</option>
-                        </select>
+                        <!-- Populated dynamically by JS -->
+                    </select>
 
-                    <select id="filterStyle" class="bg-transparent border-b border-primary/20 outline-none pb-1 cursor-pointer focus:border-primary focus:opacity-100 hover:opacity-100 transition-opacity max-w-[120px] md:max-w-none">
-                        <option value="all">STYLE: ALL</option>
-                        </select>
+                    <select id="filterEco" class="bg-transparent border-b border-primary/20 outline-none pb-1 cursor-pointer focus:border-primary focus:opacity-100 hover:opacity-100 transition-opacity max-w-[150px] md:max-w-none">
+                        <option value="all">ECO-FOCUS: ALL</option>
+                        <option value="organic">ORGANIC & NATURAL</option>
+                        <option value="recycled">RECYCLED & CIRCULAR</option>
+                        <option value="fair">FAIR TRADE & ETHICS</option>
+                        <option value="vegan">VEGAN & ANIMAL FREE</option>
+                        <option value="carbon">CLIMATE & ENERGY</option>
+                        <option value="waste">ZERO WASTE & SLOW</option>
+                    </select>
                 </div>
 
+                <!-- View Switcher -->
                 <div class="flex gap-8 mt-10 border-t border-line pt-6 w-full max-w-xs justify-center text-[9px] font-mono tracking-[0.2em] uppercase">
                     <button onclick="setViewMode('stack')" id="btn-view-stack" class="opacity-100 font-bold transition-all hover:opacity-80">Visual View</button>
                     <span class="opacity-20">/</span>
@@ -118,13 +132,18 @@
                 </div>
             </header>
 
+            <!-- VIEW INDEX GRID A : VISUAL VIEW -->
             <div id="view-stack" class="view-mode active w-full flex-col items-center pb-[20vh] pt-12 gap-40">
-                </div>
+                <!-- Programmatically populated -->
+            </div>
 
+            <!-- VIEW INDEX GRID B : MINIMAL LIST -->
             <div id="view-list" class="view-mode w-full max-w-5xl mx-auto px-6 md:px-12 flex-col items-center pb-[30vh] pt-12 gap-10">
-                </div>
+                <!-- Programmatically populated -->
+            </div>
         </div>
 
+        <!-- PAGE 2 : ECOSYSTEM -->
         <div id="page-ecosystem" class="page-section pt-48 max-w-5xl mx-auto px-6 md:px-12 pb-48">
             <span class="text-[10px] font-mono tracking-[0.4em] uppercase opacity-40">Section // 02</span>
             <h2 class="text-5xl md:text-7xl font-display font-thin tracking-widest uppercase mt-4 mb-16">ECOSYSTEM</h2>
@@ -150,6 +169,7 @@
             </div>
         </div>
 
+        <!-- PAGE 3 : TRACEABILITY -->
         <div id="page-traceability" class="page-section pt-48 max-w-5xl mx-auto px-6 md:px-12 pb-48">
             <span class="text-[10px] font-mono tracking-[0.4em] uppercase opacity-40">Section // 03</span>
             <h2 class="text-5xl md:text-7xl font-display font-thin tracking-widest uppercase mt-4 mb-24">TRACEABILITY</h2>
@@ -169,6 +189,7 @@
             </div>
         </div>
 
+        <!-- PAGE 4 : CONTRIBUTE -->
         <div id="page-contribute" class="page-section pt-48 max-w-3xl mx-auto px-6 md:px-12 pb-48">
             <span class="text-[10px] font-mono tracking-[0.4em] uppercase opacity-40">Section // 04</span>
             <h2 class="text-5xl md:text-7xl font-display font-thin tracking-widest uppercase mt-4 mb-16">CONTRIBUTE</h2>
@@ -183,6 +204,7 @@
 
     </div>
 
+    <!-- FOOTER -->
     <footer class="w-full border-t border-line bg-background py-12 px-6 md:px-12 mt-auto">
         <div class="max-w-[120rem] mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="text-xl font-display font-light tracking-[0.3em] uppercase">THE SCOPE</div>
@@ -208,7 +230,7 @@
                 const response = await fetch(`brands.json?v=${new Date().getTime()}`);
                 brandsData = await response.json();
                 
-                populateFilters(brandsData);
+                populateCountryFilter(brandsData);
                 updateCounter(brandsData.length, true);
                 renderBrands(brandsData);
             } catch (error) {
@@ -216,17 +238,11 @@
             }
         }
 
-        // POPULER LES MENUS DÉROULANTS DYNAMIQUEMENT
-        function populateFilters(data) {
+        // On ne peuple que le pays, l'éco-focus est déjà géré par les grandes catégories définies en HTML
+        function populateCountryFilter(data) {
             const countrySelect = document.getElementById('filterCountry');
-            const styleSelect = document.getElementById('filterStyle');
-            
-            // Extraire et trier les pays et styles uniques
             const countries = [...new Set(data.map(b => b.location))].sort();
-            const styles = [...new Set(data.map(b => b.style))].sort();
-
             countries.forEach(c => countrySelect.insertAdjacentHTML('beforeend', `<option value="${c}">${c}</option>`));
-            styles.forEach(s => styleSelect.insertAdjacentHTML('beforeend', `<option value="${s}">${s}</option>`));
         }
 
         function updateCounter(count, isInitial = false) {
@@ -332,44 +348,61 @@
             document.getElementById('btn-view-list').classList.toggle('opacity-30', mode !== 'list');
         }
 
-        // MASTER FILTER FUNCTION (Recherche + Tris + Menus déroulants)
+        // ALGORITHME DE TRI ET DE FILTRAGE INTELLIGENT
         function applyFiltersAndSort() {
             const query = document.getElementById('searchInput').value.toLowerCase().trim();
-            const sortVal = document.getElementById('sortPrice').value;
+            const sortVal = document.getElementById('sortData').value;
             const countryVal = document.getElementById('filterCountry').value;
-            const styleVal = document.getElementById('filterStyle').value;
+            const ecoVal = document.getElementById('filterEco').value;
 
-            // 1. Filtrer (Recherche Texte + Pays + Style)
+            // 1. Filtrer
             let filtered = brandsData.filter(brand => {
-                const matchSearch = brand.name.toLowerCase().includes(query) || 
-                                    brand.style.toLowerCase().includes(query) ||
-                                    brand.commitments.join(" ").toLowerCase().includes(query);
-                const matchCountry = countryVal === 'all' || brand.location === countryVal;
-                const matchStyle = styleVal === 'all' || brand.style === styleVal;
+                // Recherche texte libre
+                const searchString = (brand.name + " " + brand.style + " " + brand.location + " " + brand.commitments.join(" ")).toLowerCase();
+                const matchSearch = searchString.includes(query);
                 
-                return matchSearch && matchCountry && matchStyle;
+                // Filtre de Pays
+                const matchCountry = countryVal === 'all' || brand.location === countryVal;
+                
+                // Filtre d'Éco-responsabilité (Recherche par mots-clés dans le tableau commitments)
+                let matchEco = true;
+                if (ecoVal !== 'all') {
+                    const commitmentsStr = brand.commitments.join(" ").toLowerCase();
+                    if (ecoVal === 'organic') matchEco = commitmentsStr.includes('organic') || commitmentsStr.includes('natural') || commitmentsStr.includes('plant');
+                    else if (ecoVal === 'recycled') matchEco = commitmentsStr.includes('recycle') || commitmentsStr.includes('circular') || commitmentsStr.includes('deadstock') || commitmentsStr.includes('upcycl');
+                    else if (ecoVal === 'fair') matchEco = commitmentsStr.includes('fair') || commitmentsStr.includes('wage') || commitmentsStr.includes('ethic') || commitmentsStr.includes('social');
+                    else if (ecoVal === 'vegan') matchEco = commitmentsStr.includes('vegan') || commitmentsStr.includes('animal');
+                    else if (ecoVal === 'carbon') matchEco = commitmentsStr.includes('carbon') || commitmentsStr.includes('climate') || commitmentsStr.includes('energy') || commitmentsStr.includes('solar');
+                    else if (ecoVal === 'waste') matchEco = commitmentsStr.includes('waste') || commitmentsStr.includes('slow') || commitmentsStr.includes('pre-order');
+                }
+                
+                return matchSearch && matchCountry && matchEco;
             });
 
-            // 2. Trier par Prix (On compte la longueur de la chaîne "€€€")
-            if (sortVal === 'asc') {
+            // 2. Trier
+            if (sortVal === 'price-asc') {
                 filtered.sort((a, b) => a.price.length - b.price.length);
-            } else if (sortVal === 'desc') {
+            } else if (sortVal === 'price-desc') {
                 filtered.sort((a, b) => b.price.length - a.price.length);
+            } else if (sortVal === 'name-asc') {
+                filtered.sort((a, b) => a.name.localeCompare(b.name));
+            } else if (sortVal === 'name-desc') {
+                filtered.sort((a, b) => b.name.localeCompare(a.name));
             }
 
-            // 3. Gestion de l'UI Auto (Basculer en mode list ou réduire le header)
+            // 3. UI Auto-Ajustement (Réduction du Header si filtres actifs)
             const header = document.getElementById('main-header');
             const title = document.getElementById('main-title');
             const intro = document.getElementById('main-intro');
 
-            if (query.length > 0 || sortVal !== 'none' || countryVal !== 'all' || styleVal !== 'all') {
+            if (query.length > 0 || sortVal !== 'none' || countryVal !== 'all' || ecoVal !== 'all') {
                 if (currentViewMode !== 'list') setViewMode('list');
-                header.classList.replace('min-h-[60vh]', 'min-h-[30vh]');
+                header.classList.replace('min-h-[60vh]', 'min-h-[35vh]');
                 title.classList.replace('text-[14vw]', 'text-[6vw]');
                 title.classList.replace('md:text-[10vw]', 'md:text-[4vw]');
                 intro.classList.add('opacity-0', 'h-0', 'overflow-hidden', 'mt-0');
             } else {
-                header.classList.replace('min-h-[30vh]', 'min-h-[60vh]');
+                header.classList.replace('min-h-[35vh]', 'min-h-[60vh]');
                 title.classList.replace('text-[6vw]', 'text-[14vw]');
                 title.classList.replace('md:text-[4vw]', 'md:text-[10vw]');
                 intro.classList.remove('opacity-0', 'h-0', 'overflow-hidden', 'mt-0');
@@ -379,11 +412,11 @@
             renderBrands(filtered);
         }
 
-        // Lier les événements (Ecouteurs)
+        // Connecter les menus aux fonctions
         document.getElementById('searchInput').addEventListener('input', applyFiltersAndSort);
-        document.getElementById('sortPrice').addEventListener('change', applyFiltersAndSort);
+        document.getElementById('sortData').addEventListener('change', applyFiltersAndSort);
         document.getElementById('filterCountry').addEventListener('change', applyFiltersAndSort);
-        document.getElementById('filterStyle').addEventListener('change', applyFiltersAndSort);
+        document.getElementById('filterEco').addEventListener('change', applyFiltersAndSort);
 
         loadDatabase();
     </script>
