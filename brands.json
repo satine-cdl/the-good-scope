@@ -7,7 +7,7 @@
     "location": "United Kingdom",
     "website": "https://www.storymfg.com",
     "commitments": ["Natural dyes", "Zero waste", "Slow fashion"],
-    "image_url": "images/story-mfg.jpg"
+    "image_url": "story-mfg.jpg"
   },
   {
     "id": "002",
@@ -17,7 +17,7 @@
     "location": "Netherlands",
     "website": "https://mudjeans.eu",
     "commitments": ["Circular economy", "Recycled jeans", "Organic cotton"],
-    "image_url": "images/mud-jeans.jpg"
+    "image_url": "mud-jeans.jpg"
   },
   {
     "id": "003",
@@ -27,7 +27,7 @@
     "location": "Sweden",
     "website": "https://www.asket.com",
     "commitments": ["100% Traceability", "Transparent pricing"],
-    "image_url": "images/asket.jpg"
+    "image_url": "asket.jpg"
   },
   {
     "id": "004",
@@ -37,7 +37,7 @@
     "location": "New Zealand",
     "website": "https://nz.kowtowclothing.com",
     "commitments": ["100% Fairtrade cotton", "Circular end-of-life"],
-    "image_url": "images/kowtow.jpg"
+    "image_url": "kowtow.jpg"
   },
   {
     "id": "005",
@@ -47,7 +47,7 @@
     "location": "France / Brazil",
     "website": "https://www.veja-store.com",
     "commitments": ["Wild rubber", "Fair trade"],
-    "image_url": "images/veja.jpg"
+    "image_url": "veja.jpg"
   },
   {
     "id": "006",
@@ -57,7 +57,7 @@
     "location": "United Kingdom",
     "website": "https://pangaia.com",
     "commitments": ["Innovative materials", "Plant-based dyes"],
-    "image_url": "images/pangaia.jpg"
+    "image_url": "pangaia.jpg"
   },
   {
     "id": "007",
@@ -67,7 +67,7 @@
     "location": "United States",
     "website": "https://www.thereformation.com",
     "commitments": ["Carbon neutral", "Deadstock fabrics"],
-    "image_url": "images/reformation.jpg"
+    "image_url": "reformation.jpg"
   },
   {
     "id": "008",
@@ -77,7 +77,7 @@
     "location": "Germany",
     "website": "https://www.armedangels.com",
     "commitments": ["Organic cotton", "Fair working conditions"],
-    "image_url": "images/armedangels.jpg"
+    "image_url": "armedangels.jpg"
   },
   {
     "id": "009",
@@ -87,7 +87,7 @@
     "location": "Sweden",
     "website": "https://www.nudiejeans.com",
     "commitments": ["Free lifetime repairs", "100% Organic cotton"],
-    "image_url": "images.unsplash.jpg"
+    "image_url": "nudie-jeans.jpg"
   },
   {
     "id": "010",
@@ -97,7 +97,7 @@
     "location": "United Kingdom",
     "website": "https://sheepinc.com",
     "commitments": ["Carbon negative", "Traceable wool"],
-    "image_url": "images/sheep-inc.jpg"
+    "image_url": "sheep-inc.jpg"
   },
   {
     "id": "011",
