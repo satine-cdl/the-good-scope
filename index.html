@@ -27,35 +27,38 @@
     </script>
     <style>
         body { background-color: #FCFCFC; color: #111111; overflow-x: hidden; }
-        ::-webkit-scrollbar { width: 0px; display: none; }
         
-        /* Zoom loop for images */
+        /* Barre de défilement (Scrollbar) moderne et ultra-fine */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #FCFCFC; }
+        ::-webkit-scrollbar-thumb { background: #111111; border-radius: 3px; }
+        
+        /* Zoom infini pour les images */
         @keyframes slowZoom {
             0% { transform: scale(1.01); }
             100% { transform: scale(1.12); }
         }
         .zoom-loop { animation: slowZoom 25s infinite alternate ease-in-out; }
         
-        /* SPA Page management */
+        /* Gestion des sections SPA */
         .page-section { display: none; }
         .page-section.active { display: block; animation: fadeIn 0.5s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
-        /* View management */
+        /* Interrupteur de modes visuels */
         .view-mode { display: none; }
         .view-mode.active { display: flex; }
         
-        /* Fluid focus effect for BOTH Visual View and Minimal List */
+        /* Effet focus fluide (Intersection Observer) */
         .observable-item { 
             transition: all 0.7s cubic-bezier(0.25, 1, 0.5, 1); 
-            opacity: 0.2; 
-            transform: scale(0.95); 
+            opacity: 0.15; 
+            transform: scale(0.96); 
         }
         .observable-item.focus-item { 
             transform: scale(1); 
             opacity: 1; 
         }
-        /* Specific image focus */
         .visual-img { filter: grayscale(100%); transition: filter 1s ease; }
         .focus-item .visual-img { filter: grayscale(0%); }
     </style>
@@ -63,12 +66,10 @@
 
 <body class="font-display selection:bg-primary selection:text-white antialiased flex flex-col min-h-screen">
 
-    <!-- SCROLL TO TOP BUTTON -->
     <button id="scrollTopBtn" onclick="scrollToTop()" class="fixed bottom-8 right-8 z-50 bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center opacity-0 pointer-events-none translate-y-4 transition-all duration-500 shadow-lg hover:scale-110">
         <span class="material-symbols-outlined font-light">arrow_upward</span>
     </button>
 
-    <!-- GLOBAL NAVIGATION -->
     <nav class="w-full flex justify-between items-center px-6 md:px-12 py-8 z-50 fixed top-0 bg-background/90 backdrop-blur-md border-b border-line">
         <button onclick="showPage('index')" class="text-xl font-display font-light tracking-[0.3em] uppercase transition-opacity hover:opacity-60">
             THE SCOPE
@@ -82,25 +83,24 @@
         </div>
     </nav>
 
-    <!-- CONTENT WRAPPER -->
     <div class="flex-grow">
 
-        <!-- PAGE 1 : THE INDEX -->
         <div id="page-index" class="page-section active pt-32">
             
-            <!-- Header & Search -->
-            <header id="main-header" class="w-full min-h-[50vh] flex flex-col items-center justify-center px-6 transition-all duration-700 ease-in-out">
+            <header id="main-header" class="w-full min-h-[55vh] flex flex-col items-center justify-center px-6 transition-all duration-700 ease-in-out">
                 <h1 id="main-title" class="text-[14vw] md:text-[10vw] leading-none font-display font-thin tracking-widest uppercase text-center transition-all duration-700">
                     THE SCOPE
                 </h1>
                 
-                <!-- Search Bar -->
-                <div class="w-full max-w-xl relative mt-12 group">
+                <div id="brandsCountBadge" class="mt-4 font-mono text-[9px] tracking-[0.3em] uppercase opacity-40">
+                    Loading database archive...
+                </div>
+                
+                <div class="w-full max-w-xl relative mt-10 group">
                     <input id="searchInput" class="w-full bg-transparent border-0 border-b border-primary/20 focus:border-primary focus:ring-0 font-mono text-center text-[11px] tracking-[0.2em] px-0 py-4 outline-none placeholder:text-primary/30 uppercase transition-colors" placeholder="Type to search independent brands..." type="text"/>
-                    <span class="material-symbols-outlined absolute right-0 bottom-4 opacity-30 font-light transition-opacity group-focus-within:opacity-100">search</span>
+                    <span class="material-symbols-outlined absolute right-0 bottom-4 opacity-30 font-light">search</span>
                 </div>
 
-                <!-- View Switcher Controls -->
                 <div class="flex gap-8 mt-12 border-t border-line pt-6 w-full max-w-xs justify-center text-[9px] font-mono tracking-[0.2em] uppercase">
                     <button onclick="setViewMode('stack')" id="btn-view-stack" class="opacity-100 font-bold transition-all hover:opacity-80">Visual View</button>
                     <span class="opacity-20">/</span>
@@ -108,18 +108,13 @@
                 </div>
             </header>
 
-            <!-- VIEW MODE A : VISUAL VIEW (Images + Fluid Focus) -->
-            <div id="view-stack" class="view-mode active w-full flex-col items-center pb-[20vh] pt-12 gap-32">
-                <!-- Visual elements injected by JS -->
-            </div>
+            <div id="view-stack" class="view-mode active w-full flex-col items-center pb-[20vh] pt-12 gap-48">
+                </div>
 
-            <!-- VIEW MODE B : MINIMAL LIST (Text + Fluid Focus, No Borders) -->
             <div id="view-list" class="view-mode w-full max-w-5xl mx-auto px-6 md:px-12 flex-col items-center pb-[30vh] pt-12 gap-12 md:gap-16">
-                <!-- Text elements injected by JS -->
-            </div>
+                </div>
         </div>
 
-        <!-- PAGE 2 : ECOSYSTEM -->
         <div id="page-ecosystem" class="page-section pt-48 max-w-5xl mx-auto px-6 md:px-12 pb-48">
             <span class="text-[10px] font-mono tracking-[0.4em] uppercase opacity-40">Section // 02</span>
             <h2 class="text-5xl md:text-7xl font-display font-thin tracking-widest uppercase mt-4 mb-16">ECOSYSTEM</h2>
@@ -159,7 +154,6 @@
             </div>
         </div>
 
-        <!-- PAGE 3 : TRACEABILITY -->
         <div id="page-traceability" class="page-section pt-48 max-w-5xl mx-auto px-6 md:px-12 pb-48">
             <span class="text-[10px] font-mono tracking-[0.4em] uppercase opacity-40">Section // 03</span>
             <h2 class="text-5xl md:text-7xl font-display font-thin tracking-widest uppercase mt-4 mb-24">TRACEABILITY</h2>
@@ -202,7 +196,6 @@
             </div>
         </div>
 
-        <!-- PAGE 4 : CONTRIBUTE -->
         <div id="page-contribute" class="page-section pt-48 max-w-3xl mx-auto px-6 md:px-12 pb-48">
             <span class="text-[10px] font-mono tracking-[0.4em] uppercase opacity-40">Section // 04</span>
             <h2 class="text-5xl md:text-7xl font-display font-thin tracking-widest uppercase mt-4 mb-16">CONTRIBUTE</h2>
@@ -236,10 +229,7 @@
             </form>
         </div>
 
-    </div> 
-
-    <!-- FOOTER -->
-    <footer class="w-full border-t border-line bg-background py-12 px-6 md:px-12 mt-auto">
+    </div> <footer class="w-full border-t border-line bg-background py-12 px-6 md:px-12 mt-auto">
         <div class="max-w-[120rem] mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
             <div class="text-xl font-display font-light tracking-[0.3em] uppercase">
                 THE SCOPE
@@ -261,7 +251,7 @@
         let currentViewMode = 'stack'; 
         let globalObserver = null; 
 
-        // Scroll to Top Logic
+        // Gestion du bouton Scroll to Top
         window.addEventListener('scroll', () => {
             const btn = document.getElementById('scrollTopBtn');
             if (window.scrollY > 400) {
@@ -280,10 +270,23 @@
                 const cacheBuster = new Date().getTime();
                 const response = await fetch(`brands.json?v=${cacheBuster}`);
                 brandsData = await response.json();
+                
+                // Indiquer le nombre total de marques au démarrage
+                updateCounter(brandsData.length, true);
                 renderBrands(brandsData);
             } catch (error) {
                 console.error("Database error:", error);
                 document.getElementById('view-stack').innerHTML = "<p class='font-mono text-[10px] uppercase text-red-500 mt-12'>Database connection failure.</p>";
+            }
+        }
+
+        // Met à jour l'affichage textuel du nombre de marques référencées
+        function updateCounter(count, isInitial = false) {
+            const badge = document.getElementById('brandsCountBadge');
+            if (isInitial) {
+                badge.innerText = `// REGISTERED ARCHIVE: ${count} INDEPENDENT LABELS`;
+            } else {
+                badge.innerText = `// MATCHING ENTRIES: ${count} LABELS FOUND`;
             }
         }
 
@@ -305,14 +308,21 @@
                 return;
             }
 
-            brands.forEach(brand => {
-                // --- VIEW A : VISUAL VIEW (IMAGES) ---
+            brands.forEach((brand, index) => {
+                // Créer le numéro padé (01, 02, 03...)
+                const brandNumber = String(index + 1).padStart(2, '0');
+
+                // --- VIEW A : VISUAL VIEW (Avec numéro flottant à gauche) ---
                 const visualCard = `
-                    <div class="observable-item w-full flex justify-center px-4">
-                        <a href="${brand.website}" target="_blank" rel="noopener noreferrer" class="relative w-full max-w-[28rem] md:max-w-[34rem] aspect-[4/5] bg-[#111] overflow-hidden shadow-[0_30px_60px_rgba(0,0,0,0.06)] group cursor-crosshair">
+                    <div class="observable-item w-full flex justify-center px-4 relative group">
+                        <div class="absolute left-4 md:left-[22%] top-0 font-mono text-[11px] tracking-widest opacity-20 group-hover:opacity-100 transition-opacity duration-500">
+                            INDEX_N° ${brandNumber}
+                        </div>
+                        
+                        <a href="${brand.website}" target="_blank" rel="noopener noreferrer" class="relative w-full max-w-[28rem] md:max-w-[34rem] aspect-[4/5] bg-[#111] overflow-hidden shadow-[0_30px_60px_rgba(0,0,0,0.04)] cursor-crosshair">
                             <img src="${brand.image_url}" alt="${brand.name}" class="visual-img w-full h-full object-cover zoom-loop" loading="lazy" />
                             <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent flex flex-col justify-end p-8 md:p-12 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                                <h2 class="text-4xl md:text-5xl font-display font-light uppercase tracking-[0.1em] text-white tracking-[0.15em]">${brand.name}</h2>
+                                <h2 class="text-4xl md:text-5xl font-display font-light uppercase tracking-[0.1em] text-white">${brand.name}</h2>
                                 <p class="text-[9px] md:text-[10px] font-mono tracking-[0.3em] uppercase text-white/60 mt-3">${brand.style}</p>
                                 <div class="w-full h-[1px] bg-white/20 mt-6 mb-4"></div>
                                 <div class="flex justify-between items-center w-full">
@@ -327,19 +337,23 @@
                 `;
                 stackContainer.insertAdjacentHTML('beforeend', visualCard);
 
-                // --- VIEW B : MINIMAL LIST (NO BORDERS/BACKGROUNDS) ---
+                // --- VIEW B : MINIMAL LIST (Avec numéro intégré dans la ligne) ---
                 const listCard = `
                     <div class="observable-item w-full flex justify-center px-4">
-                        <a href="${brand.website}" target="_blank" rel="noopener noreferrer" class="w-full flex flex-col md:flex-row justify-between items-start md:items-center py-4 md:py-8 border-b border-line/50 group cursor-crosshair gap-4">
-                            <div class="flex flex-col w-full md:w-1/3">
-                                <h3 class="font-display text-2xl md:text-4xl font-light tracking-[0.15em] uppercase text-primary group-hover:ml-4 transition-all duration-300">${brand.name}</h3>
+                        <a href="${brand.website}" target="_blank" rel="noopener noreferrer" class="w-full flex flex-col md:flex-row justify-between items-start md:items-center py-5 border-b border-line/50 group cursor-crosshair gap-4 relative">
+                            
+                            <div class="flex items-center w-full md:w-1/3 gap-6">
+                                <span class="font-mono text-[10px] tracking-widest opacity-20 group-hover:opacity-100 transition-opacity">${brandNumber}</span>
+                                <h3 class="font-display text-2xl md:text-3xl font-light tracking-[0.15em] uppercase text-primary group-hover:translate-x-2 transition-transform duration-300">${brand.name}</h3>
                             </div>
+                            
                             <div class="flex flex-col md:items-center w-full md:w-1/3 gap-2">
                                 <span class="font-mono text-[9px] tracking-[0.2em] uppercase opacity-40">${brand.style}</span>
                                 <div class="flex flex-wrap gap-2">
                                     ${brand.commitments.map(c => `<span class="text-[7px] font-mono uppercase tracking-wider text-primary border border-primary/20 px-2 py-0.5">${c}</span>`).join('')}
                                 </div>
                             </div>
+                            
                             <div class="flex flex-col items-start md:items-end w-full md:w-1/3 font-mono text-[10px] tracking-wider uppercase opacity-50 gap-1">
                                 <span>${brand.location}</span>
                                 <span>${brand.price}</span>
@@ -353,7 +367,7 @@
             setupGlobalObserver();
         }
 
-        // ONE OBSERVER TO RULE THEM ALL
+        // Observateur d'intersection global (Focus centré)
         function setupGlobalObserver() {
             const items = document.querySelectorAll('.observable-item');
             
@@ -367,20 +381,23 @@
                 });
             }, { 
                 root: null, 
-                rootMargin: '-30% 0px -30% 0px', // Focus window strictly in the center
+                rootMargin: '-30% 0px -30% 0px', 
                 threshold: 0 
             });
 
             items.forEach(item => globalObserver.observe(item));
         }
 
-        // SPA NAVIGATION MANAGER
+        // SPA Navigation Logic
         function showPage(pageId) {
             document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
             document.getElementById(`page-${pageId}`).classList.add('active');
 
-            document.querySelectorAll('nav button').forEach(b => b.classList.add('opacity-40', 'border-transparent'));
-            document.querySelectorAll('nav button').forEach(b => b.classList.remove('font-medium', 'border-primary'));
+            document.querySelectorAll('nav b').forEach(b => b.classList.add('opacity-40', 'border-transparent'));
+            document.querySelectorAll('nav button').forEach(b => {
+                b.classList.add('opacity-40', 'border-transparent');
+                b.classList.remove('font-medium', 'border-primary');
+            });
             
             const activeNav = document.getElementById(`nav-${pageId}`);
             if(activeNav){
@@ -391,7 +408,7 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // TOGGLE SWITCHER
+        // View Mode Switcher
         function setViewMode(mode) {
             currentViewMode = mode;
             document.querySelectorAll('.view-mode').forEach(v => v.classList.remove('active'));
@@ -403,7 +420,7 @@
             document.getElementById('btn-view-list').classList.toggle('opacity-30', mode !== 'list');
         }
 
-        // SEARCH & AUTO-UX
+        // Barre de recherche adaptative
         document.getElementById('searchInput').addEventListener('input', (e) => {
             const query = e.target.value.toLowerCase().trim();
             
@@ -411,13 +428,14 @@
             const title = document.getElementById('main-title');
             
             if (query.length > 0) {
+                // Force le mode liste sans images pendant la recherche pour la lisibilité
                 if (currentViewMode !== 'list') setViewMode('list');
                 
-                header.classList.replace('min-h-[50vh]', 'min-h-[25vh]');
+                header.classList.replace('min-h-[55vh]', 'min-h-[25vh]');
                 title.classList.replace('text-[14vw]', 'text-[6vw]');
                 title.classList.replace('md:text-[10vw]', 'md:text-[4vw]');
             } else {
-                header.classList.replace('min-h-[25vh]', 'min-h-[50vh]');
+                header.classList.replace('min-h-[25vh]', 'min-h-[55vh]');
                 title.classList.replace('text-[6vw]', 'text-[14vw]');
                 title.classList.replace('md:text-[4vw]', 'md:text-[10vw]');
             }
@@ -430,6 +448,8 @@
                        brand.commitments.join(" ").toLowerCase().includes(query);
             });
             
+            // Mettre à jour le compteur en temps réel avec le résultat du filtre
+            updateCounter(filteredBrands.length, query.length === 0);
             renderBrands(filteredBrands);
         });
 
