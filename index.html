@@ -29,31 +29,46 @@
         body { background-color: #FCFCFC; color: #111111; overflow-x: hidden; }
         ::-webkit-scrollbar { width: 0px; display: none; }
         
-        /* Animation pour l'image du Stack Lookbook */
+        /* Zoom loop for images */
         @keyframes slowZoom {
             0% { transform: scale(1.01); }
             100% { transform: scale(1.12); }
         }
         .zoom-loop { animation: slowZoom 25s infinite alternate ease-in-out; }
         
-        /* Gestion des pages (SPA) */
+        /* SPA Page management */
         .page-section { display: none; }
         .page-section.active { display: block; animation: fadeIn 0.5s ease-out forwards; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         
-        /* Gestion des vues Stack/List */
+        /* View management */
         .view-mode { display: none; }
         .view-mode.active { display: flex; }
         
-        /* Effet zoom fluide pour la liste texte */
-        .list-card { transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1); }
-        .list-card.focus-list { transform: scale(1.02); opacity: 1; border-color: #111111; box-shadow: 0 20px 40px rgba(0,0,0,0.05); z-index: 20; }
+        /* Fluid focus effect for BOTH Visual View and Minimal List */
+        .observable-item { 
+            transition: all 0.7s cubic-bezier(0.25, 1, 0.5, 1); 
+            opacity: 0.2; 
+            transform: scale(0.95); 
+        }
+        .observable-item.focus-item { 
+            transform: scale(1); 
+            opacity: 1; 
+        }
+        /* Specific image focus */
+        .visual-img { filter: grayscale(100%); transition: filter 1s ease; }
+        .focus-item .visual-img { filter: grayscale(0%); }
     </style>
 </head>
 
 <body class="font-display selection:bg-primary selection:text-white antialiased flex flex-col min-h-screen">
 
-    <!-- NAVIGATION GLOBAL -->
+    <!-- SCROLL TO TOP BUTTON -->
+    <button id="scrollTopBtn" onclick="scrollToTop()" class="fixed bottom-8 right-8 z-50 bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center opacity-0 pointer-events-none translate-y-4 transition-all duration-500 shadow-lg hover:scale-110">
+        <span class="material-symbols-outlined font-light">arrow_upward</span>
+    </button>
+
+    <!-- GLOBAL NAVIGATION -->
     <nav class="w-full flex justify-between items-center px-6 md:px-12 py-8 z-50 fixed top-0 bg-background/90 backdrop-blur-md border-b border-line">
         <button onclick="showPage('index')" class="text-xl font-display font-light tracking-[0.3em] uppercase transition-opacity hover:opacity-60">
             THE SCOPE
@@ -70,7 +85,7 @@
     <!-- CONTENT WRAPPER -->
     <div class="flex-grow">
 
-        <!-- PAGE 1 : THE INDEX (MAIN DIRECTORY) -->
+        <!-- PAGE 1 : THE INDEX -->
         <div id="page-index" class="page-section active pt-32">
             
             <!-- Header & Search -->
@@ -79,7 +94,7 @@
                     THE SCOPE
                 </h1>
                 
-                <!-- Advanced Search Bar -->
+                <!-- Search Bar -->
                 <div class="w-full max-w-xl relative mt-12 group">
                     <input id="searchInput" class="w-full bg-transparent border-0 border-b border-primary/20 focus:border-primary focus:ring-0 font-mono text-center text-[11px] tracking-[0.2em] px-0 py-4 outline-none placeholder:text-primary/30 uppercase transition-colors" placeholder="Type to search independent brands..." type="text"/>
                     <span class="material-symbols-outlined absolute right-0 bottom-4 opacity-30 font-light transition-opacity group-focus-within:opacity-100">search</span>
@@ -87,22 +102,20 @@
 
                 <!-- View Switcher Controls -->
                 <div class="flex gap-8 mt-12 border-t border-line pt-6 w-full max-w-xs justify-center text-[9px] font-mono tracking-[0.2em] uppercase">
-                    <button onclick="setViewMode('stack')" id="btn-view-stack" class="opacity-100 font-bold transition-all hover:opacity-80">Stacked Lookbook</button>
+                    <button onclick="setViewMode('stack')" id="btn-view-stack" class="opacity-100 font-bold transition-all hover:opacity-80">Visual View</button>
                     <span class="opacity-20">/</span>
                     <button onclick="setViewMode('list')" id="btn-view-list" class="opacity-30 hover:opacity-100 transition-all">Minimal List</button>
                 </div>
             </header>
 
-            <!-- VIEW MODE A : STACKED LOOKBOOK (Images) -->
-            <div id="view-stack" class="view-mode active w-full flex-col items-center pb-[30vh]">
-                <!-- Stack elements injected by JS -->
+            <!-- VIEW MODE A : VISUAL VIEW (Images + Fluid Focus) -->
+            <div id="view-stack" class="view-mode active w-full flex-col items-center pb-[20vh] pt-12 gap-32">
+                <!-- Visual elements injected by JS -->
             </div>
 
-            <!-- VIEW MODE B : FLUID TEXT STACK (No images, dynamic zoom) -->
-            <div id="view-list" class="view-mode w-full max-w-5xl mx-auto px-6 md:px-12 flex-col items-center pb-[40vh] pt-12">
-                <div id="listContainer" class="flex flex-col w-full relative">
-                    <!-- Text cards injected by JS -->
-                </div>
+            <!-- VIEW MODE B : MINIMAL LIST (Text + Fluid Focus, No Borders) -->
+            <div id="view-list" class="view-mode w-full max-w-5xl mx-auto px-6 md:px-12 flex-col items-center pb-[30vh] pt-12 gap-12 md:gap-16">
+                <!-- Text elements injected by JS -->
             </div>
         </div>
 
@@ -151,7 +164,6 @@
             <span class="text-[10px] font-mono tracking-[0.4em] uppercase opacity-40">Section // 03</span>
             <h2 class="text-5xl md:text-7xl font-display font-thin tracking-widest uppercase mt-4 mb-24">TRACEABILITY</h2>
             
-            <!-- Timeline Structure -->
             <div class="flex flex-col gap-0 font-display relative before:absolute before:inset-0 before:ml-[28px] md:before:ml-[50%] before:-translate-x-px md:before:translate-x-0 before:w-[1px] before:bg-line">
                 
                 <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group w-full mb-24">
@@ -161,7 +173,7 @@
                     <div class="w-[calc(100%-4rem)] md:w-[calc(50%-3rem)] bg-white border border-line p-6 shadow-sm">
                         <span class="font-mono text-[9px] tracking-widest opacity-40 mb-2 block">TIER 1</span>
                         <h3 class="text-xl uppercase tracking-wider font-light mb-3">Agricultural Root Source</h3>
-                        <p class="text-[11px] font-mono opacity-60 leading-relaxed">Tracing fibers directly back to regenerative farming networks, organic soil cultures, and non-hazardous botanical raw materials. Every thread requires a certified genesis validation.</p>
+                        <p class="text-[11px] font-mono opacity-60 leading-relaxed">Tracing fibers directly back to regenerative farming networks, organic soil cultures, and non-hazardous botanical raw materials.</p>
                     </div>
                 </div>
 
@@ -172,7 +184,7 @@
                     <div class="w-[calc(100%-4rem)] md:w-[calc(50%-3rem)] bg-white border border-line p-6 shadow-sm">
                         <span class="font-mono text-[9px] tracking-widest opacity-40 mb-2 block">TIER 2</span>
                         <h3 class="text-xl uppercase tracking-wider font-light mb-3">Clean Spinning & Dyeing</h3>
-                        <p class="text-[11px] font-mono opacity-60 leading-relaxed">Monitoring closed-loop chemical purification systems and water recycling protocols. No heavy metals or chemical runoff are allowed inside our indexed production plants.</p>
+                        <p class="text-[11px] font-mono opacity-60 leading-relaxed">Monitoring closed-loop chemical purification systems and water recycling protocols. No heavy metals or chemical runoff are allowed.</p>
                     </div>
                 </div>
 
@@ -183,7 +195,7 @@
                     <div class="w-[calc(100%-4rem)] md:w-[calc(50%-3rem)] bg-white border border-line p-6 shadow-sm">
                         <span class="font-mono text-[9px] tracking-widest opacity-40 mb-2 block">TIER 3</span>
                         <h3 class="text-xl uppercase tracking-wider font-light mb-3">Ethical Atelier Mapping</h3>
-                        <p class="text-[11px] font-mono opacity-60 leading-relaxed">Full declaration of final crafting locations. We verify fair trade labor environments, preserving safe worker regulations and total structural transparency across all borders.</p>
+                        <p class="text-[11px] font-mono opacity-60 leading-relaxed">Full declaration of final crafting locations. We verify fair trade labor environments and total structural transparency.</p>
                     </div>
                 </div>
 
@@ -224,7 +236,7 @@
             </form>
         </div>
 
-    </div> <!-- End Content Wrapper -->
+    </div> 
 
     <!-- FOOTER -->
     <footer class="w-full border-t border-line bg-background py-12 px-6 md:px-12 mt-auto">
@@ -247,7 +259,21 @@
     <script>
         let brandsData = [];
         let currentViewMode = 'stack'; 
-        let listObserver = null; // Observer for the fluid text list
+        let globalObserver = null; 
+
+        // Scroll to Top Logic
+        window.addEventListener('scroll', () => {
+            const btn = document.getElementById('scrollTopBtn');
+            if (window.scrollY > 400) {
+                btn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+            } else {
+                btn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
         async function loadDatabase() {
             try {
@@ -256,37 +282,37 @@
                 brandsData = await response.json();
                 renderBrands(brandsData);
             } catch (error) {
-                console.error("Database connection error:", error);
+                console.error("Database error:", error);
                 document.getElementById('view-stack').innerHTML = "<p class='font-mono text-[10px] uppercase text-red-500 mt-12'>Database connection failure.</p>";
             }
         }
 
         function renderBrands(brands) {
             const stackContainer = document.getElementById('view-stack');
-            const listContainer = document.getElementById('listContainer');
+            const listContainer = document.getElementById('view-list');
             
             stackContainer.innerHTML = '';
             listContainer.innerHTML = '';
 
-            if (listObserver) {
-                listObserver.disconnect();
+            if (globalObserver) {
+                globalObserver.disconnect();
             }
 
             if (brands.length === 0) {
-                const errorMsg = "<p class='text-center text-[10px] font-mono tracking-widest uppercase opacity-40 my-24'>0 elements matching your query.</p>";
+                const errorMsg = "<p class='text-center text-[10px] font-mono tracking-widest uppercase opacity-40 my-24 w-full'>0 elements matching your query.</p>";
                 stackContainer.innerHTML = errorMsg;
                 listContainer.innerHTML = errorMsg;
                 return;
             }
 
             brands.forEach(brand => {
-                // --- VIEW A : STACKED LOOKBOOK (IMAGES) ---
-                const stackCard = `
-                    <div class="sticky top-[12vh] md:top-[16vh] w-full flex justify-center mb-[60vh] px-4">
-                        <a href="${brand.website}" target="_blank" rel="noopener noreferrer" class="relative w-full max-w-[28rem] md:max-w-[34rem] aspect-[4/5] bg-black overflow-hidden shadow-[0_30px_60px_rgba(0,0,0,0.06)] group cursor-crosshair">
-                            <img src="${brand.image_url}" alt="${brand.name}" class="w-full h-full object-cover opacity-85 group-hover:opacity-100 zoom-loop transition-opacity duration-700" loading="lazy" />
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent flex flex-col justify-end p-8 md:p-12">
-                                <h2 class="text-4xl md:text-5xl font-display font-light uppercase tracking-[0.1em] text-white group-hover:tracking-[0.15em] transition-all duration-500">${brand.name}</h2>
+                // --- VIEW A : VISUAL VIEW (IMAGES) ---
+                const visualCard = `
+                    <div class="observable-item w-full flex justify-center px-4">
+                        <a href="${brand.website}" target="_blank" rel="noopener noreferrer" class="relative w-full max-w-[28rem] md:max-w-[34rem] aspect-[4/5] bg-[#111] overflow-hidden shadow-[0_30px_60px_rgba(0,0,0,0.06)] group cursor-crosshair">
+                            <img src="${brand.image_url}" alt="${brand.name}" class="visual-img w-full h-full object-cover zoom-loop" loading="lazy" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent flex flex-col justify-end p-8 md:p-12 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                <h2 class="text-4xl md:text-5xl font-display font-light uppercase tracking-[0.1em] text-white tracking-[0.15em]">${brand.name}</h2>
                                 <p class="text-[9px] md:text-[10px] font-mono tracking-[0.3em] uppercase text-white/60 mt-3">${brand.style}</p>
                                 <div class="w-full h-[1px] bg-white/20 mt-6 mb-4"></div>
                                 <div class="flex justify-between items-center w-full">
@@ -299,53 +325,53 @@
                         </a>
                     </div>
                 `;
-                stackContainer.insertAdjacentHTML('beforeend', stackCard);
+                stackContainer.insertAdjacentHTML('beforeend', visualCard);
 
-                // --- VIEW B : FLUID TEXT STACK (NO IMAGES) ---
-                // Chaque carte est "sticky" pour créer l'effet d'empilement
+                // --- VIEW B : MINIMAL LIST (NO BORDERS/BACKGROUNDS) ---
                 const listCard = `
-                    <a href="${brand.website}" target="_blank" rel="noopener noreferrer" class="list-card observable-list-item sticky top-[15vh] md:top-[20vh] w-full bg-[#FCFCFC] border border-line p-6 md:p-8 flex flex-col md:flex-row justify-between items-start md:items-center mb-[10vh] md:mb-[15vh] opacity-30 scale-95 cursor-crosshair">
-                        <div class="flex flex-col mb-4 md:mb-0 w-full md:w-1/3">
-                            <h3 class="font-display text-2xl md:text-3xl font-light tracking-[0.15em] uppercase text-primary">${brand.name}</h3>
-                            <span class="font-mono text-[9px] tracking-[0.2em] uppercase opacity-40 mt-1">${brand.style}</span>
-                        </div>
-                        <div class="flex flex-wrap gap-2 mb-4 md:mb-0 w-full md:w-1/3 justify-start md:justify-center">
-                            ${brand.commitments.map(c => `<span class="text-[8px] font-mono uppercase tracking-wider bg-background border border-line text-primary px-2 py-1">${c}</span>`).join('')}
-                        </div>
-                        <div class="flex flex-col items-start md:items-end w-full md:w-1/3 font-mono text-[10px] tracking-wider uppercase opacity-50 gap-1">
-                            <span>${brand.location}</span>
-                            <span>${brand.price}</span>
-                        </div>
-                    </a>
+                    <div class="observable-item w-full flex justify-center px-4">
+                        <a href="${brand.website}" target="_blank" rel="noopener noreferrer" class="w-full flex flex-col md:flex-row justify-between items-start md:items-center py-4 md:py-8 border-b border-line/50 group cursor-crosshair gap-4">
+                            <div class="flex flex-col w-full md:w-1/3">
+                                <h3 class="font-display text-2xl md:text-4xl font-light tracking-[0.15em] uppercase text-primary group-hover:ml-4 transition-all duration-300">${brand.name}</h3>
+                            </div>
+                            <div class="flex flex-col md:items-center w-full md:w-1/3 gap-2">
+                                <span class="font-mono text-[9px] tracking-[0.2em] uppercase opacity-40">${brand.style}</span>
+                                <div class="flex flex-wrap gap-2">
+                                    ${brand.commitments.map(c => `<span class="text-[7px] font-mono uppercase tracking-wider text-primary border border-primary/20 px-2 py-0.5">${c}</span>`).join('')}
+                                </div>
+                            </div>
+                            <div class="flex flex-col items-start md:items-end w-full md:w-1/3 font-mono text-[10px] tracking-wider uppercase opacity-50 gap-1">
+                                <span>${brand.location}</span>
+                                <span>${brand.price}</span>
+                            </div>
+                        </a>
+                    </div>
                 `;
                 listContainer.insertAdjacentHTML('beforeend', listCard);
             });
 
-            setupListObserver();
+            setupGlobalObserver();
         }
 
-        // OBSERVER POUR L'EFFET FLUID ZOOM DE LA LISTE
-        function setupListObserver() {
-            const items = document.querySelectorAll('.observable-list-item');
+        // ONE OBSERVER TO RULE THEM ALL
+        function setupGlobalObserver() {
+            const items = document.querySelectorAll('.observable-item');
             
-            listObserver = new IntersectionObserver((entries) => {
+            globalObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    // Quand l'élément est au milieu de l'écran, on applique le zoom et l'opacité 100%
                     if (entry.isIntersecting) {
-                        entry.target.classList.add('focus-list');
-                        entry.target.classList.remove('opacity-30', 'scale-95');
+                        entry.target.classList.add('focus-item');
                     } else {
-                        entry.target.classList.remove('focus-list');
-                        entry.target.classList.add('opacity-30', 'scale-95');
+                        entry.target.classList.remove('focus-item');
                     }
                 });
             }, { 
                 root: null, 
-                rootMargin: '-35% 0px -35% 0px', // Ne déclenche que dans la bande centrale de l'écran
+                rootMargin: '-30% 0px -30% 0px', // Focus window strictly in the center
                 threshold: 0 
             });
 
-            items.forEach(item => listObserver.observe(item));
+            items.forEach(item => globalObserver.observe(item));
         }
 
         // SPA NAVIGATION MANAGER
@@ -356,12 +382,8 @@
             document.querySelectorAll('nav button').forEach(b => b.classList.add('opacity-40', 'border-transparent'));
             document.querySelectorAll('nav button').forEach(b => b.classList.remove('font-medium', 'border-primary'));
             
-            if(pageId !== 'index') {
-                const activeNav = document.getElementById(`nav-${pageId}`);
-                activeNav.classList.remove('opacity-40', 'border-transparent');
-                activeNav.classList.add('font-medium', 'border-primary');
-            } else {
-                const activeNav = document.getElementById(`nav-index`);
+            const activeNav = document.getElementById(`nav-${pageId}`);
+            if(activeNav){
                 activeNav.classList.remove('opacity-40', 'border-transparent');
                 activeNav.classList.add('font-medium', 'border-primary');
             }
@@ -369,7 +391,7 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // TOGGLE SWITCHER BETWEEN STACK AND LIST
+        // TOGGLE SWITCHER
         function setViewMode(mode) {
             currentViewMode = mode;
             document.querySelectorAll('.view-mode').forEach(v => v.classList.remove('active'));
@@ -381,30 +403,25 @@
             document.getElementById('btn-view-list').classList.toggle('opacity-30', mode !== 'list');
         }
 
-        // RECHERCHE AVANCÉE & CHANGEMENT D'UX AUTO
+        // SEARCH & AUTO-UX
         document.getElementById('searchInput').addEventListener('input', (e) => {
             const query = e.target.value.toLowerCase().trim();
             
-            // 1. Gérer l'affichage visuel du header
             const header = document.getElementById('main-header');
             const title = document.getElementById('main-title');
             
             if (query.length > 0) {
-                // L'utilisateur cherche : on bascule en mode LISTE automatiquement pour la visibilité
                 if (currentViewMode !== 'list') setViewMode('list');
                 
-                // On réduit la taille du header pour remonter les résultats
                 header.classList.replace('min-h-[50vh]', 'min-h-[25vh]');
                 title.classList.replace('text-[14vw]', 'text-[6vw]');
                 title.classList.replace('md:text-[10vw]', 'md:text-[4vw]');
             } else {
-                // L'utilisateur a effacé sa recherche : retour à l'écran d'accueil
                 header.classList.replace('min-h-[25vh]', 'min-h-[50vh]');
                 title.classList.replace('text-[6vw]', 'text-[14vw]');
                 title.classList.replace('md:text-[4vw]', 'md:text-[10vw]');
             }
             
-            // 2. Filtrage des données
             const filteredBrands = brandsData.filter(brand => {
                 return brand.name.toLowerCase().includes(query) || 
                        brand.style.toLowerCase().includes(query) ||
