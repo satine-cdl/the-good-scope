@@ -7,209 +7,139 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@100;200;300;400;500&family=JetBrains+Mono:wght@100;200;300;400&display=swap" rel="stylesheet"/>
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        background: "#FCFCFC",
-                        primary: "#111111",
-                        line: "#EAEAEA",
-                    },
-                    fontFamily: {
-                        "display": ["Jost", "sans-serif"],
-                        "mono": ["JetBrains Mono", "monospace"],
-                    }
-                }
-            }
-        }
-    </script>
     <style>
         body { background-color: #FCFCFC; color: #111111; overflow-x: hidden; }
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #FCFCFC; }
         ::-webkit-scrollbar-thumb { background: #111111; border-radius: 3px; }
         
-        @keyframes slowZoom { 0% { transform: scale(1.01); } 100% { transform: scale(1.12); } }
-        .zoom-loop { animation: slowZoom 25s infinite alternate ease-in-out; }
-        
         .page-section { display: none; }
-        .page-section.active { display: block; animation: fadeIn 0.5s ease-out forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .page-section.active { display: block; }
         
         .view-mode { display: none; }
         .view-mode.active { display: flex; }
         
-        .observable-item { transition: all 0.7s cubic-bezier(0.25, 1, 0.5, 1); opacity: 0.2; transform: scale(0.96); }
-        .observable-item.focus-item { transform: scale(1); opacity: 1; }
-        .visual-img { filter: grayscale(100%); transition: filter 1s ease; }
-        .focus-item .visual-img { filter: grayscale(0%); }
+        /* Animation zoom */
+        @keyframes slowZoom { 0% { transform: scale(1.01); } 100% { transform: scale(1.12); } }
+        .zoom-loop { animation: slowZoom 25s infinite alternate ease-in-out; }
     </style>
 </head>
 
 <body class="font-display antialiased flex flex-col min-h-screen">
 
-    <button id="scrollTopBtn" onclick="scrollToTop()" class="fixed bottom-8 right-8 z-50 bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center opacity-0 pointer-events-none translate-y-4 transition-all duration-500 shadow-lg hover:scale-110">
+    <!-- Scroll Top -->
+    <button id="scrollTopBtn" onclick="scrollToTop()" class="fixed bottom-8 right-8 z-50 bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center opacity-0 pointer-events-none transition-all duration-500 shadow-lg hover:scale-110">
         <span class="material-symbols-outlined font-light">arrow_upward</span>
     </button>
 
+    <!-- Nav -->
     <nav class="w-full flex justify-between items-center px-6 md:px-12 py-8 z-50 fixed top-0 bg-background/90 backdrop-blur-md border-b border-line">
-        <button onclick="showPage('index')" class="text-xl font-display font-light tracking-[0.3em] uppercase transition-opacity hover:opacity-60">
-            THE SCOPE
-        </button>
+        <button onclick="showPage('index')" class="text-xl uppercase tracking-[0.3em]">THE SCOPE</button>
         <div class="hidden md:flex gap-12">
-            <button onclick="showPage('index')" id="nav-index" class="text-[10px] font-mono tracking-[0.2em] uppercase pb-1 border-b border-primary font-medium transition-all">The Index</button>
-            <button onclick="showPage('ecosystem')" id="nav-ecosystem" class="text-[10px] font-mono tracking-[0.2em] uppercase pb-1 border-b border-transparent opacity-40 hover:opacity-100 transition-all">Ecosystem</button>
-            <button onclick="showPage('traceability')" id="nav-traceability" class="text-[10px] font-mono tracking-[0.2em] uppercase pb-1 border-b border-transparent opacity-40 hover:opacity-100 transition-all">Traceability</button>
-            <button onclick="showPage('contribute')" id="nav-contribute" class="text-[10px] font-mono tracking-[0.2em] uppercase pb-1 border-b border-transparent opacity-40 hover:opacity-100 transition-all">Contribute</button>
+            <button onclick="showPage('index')" id="nav-index" class="text-[10px] font-mono tracking-[0.2em] uppercase font-bold border-b border-primary">The Index</button>
+            <button onclick="showPage('ecosystem')" class="text-[10px] font-mono tracking-[0.2em] uppercase opacity-40 hover:opacity-100">Ecosystem</button>
+            <button onclick="showPage('traceability')" class="text-[10px] font-mono tracking-[0.2em] uppercase opacity-40 hover:opacity-100">Traceability</button>
+            <button onclick="showPage('contribute')" class="text-[10px] font-mono tracking-[0.2em] uppercase opacity-40 hover:opacity-100">Contribute</button>
         </div>
     </nav>
 
-    <div class="flex-grow">
-        <div id="page-index" class="page-section active pt-32">
-            <header id="main-header" class="w-full min-h-[60vh] flex flex-col items-center justify-center px-6 transition-all duration-700 ease-in-out">
-                <div id="brandsCountBadge" class="mb-4 font-mono text-[10px] tracking-[0.2em] uppercase text-white bg-primary px-4 py-1.5 font-medium shadow-sm transition-all">
-                    // FETCHING DATASETS...
+    <div class="flex-grow pt-32">
+        <div id="page-index" class="page-section active">
+            <header class="flex flex-col items-center justify-center px-6 mb-16">
+                <div id="brandsCountBadge" class="mb-4 font-mono text-[10px] tracking-[0.2em] uppercase bg-primary text-white px-4 py-1.5 shadow-sm">
+                    // LOADING ARCHIVE...
                 </div>
-                <h1 id="main-title" class="text-[14vw] md:text-[10vw] leading-none font-display font-thin tracking-widest uppercase text-center transition-all duration-700">THE SCOPE</h1>
-                <p id="main-intro" class="mt-6 text-sm font-display font-light max-w-xl text-center tracking-wide leading-relaxed opacity-60 transition-all duration-500">Exposing sustainable alternative apparel loops. We catalog independent labels respecting environmental and human boundaries to reshape modern consumption awareness.</p>
-                <div class="w-full max-w-xl relative mt-10 group">
-                    <input id="searchInput" class="w-full bg-transparent border-0 border-b border-primary/20 focus:border-primary focus:ring-0 font-mono text-center text-[11px] tracking-[0.2em] px-0 py-4 outline-none placeholder:text-primary/30 uppercase transition-colors" placeholder="Type to search independent brands..." type="text"/>
+                <h1 class="text-[12vw] font-thin tracking-widest uppercase">THE SCOPE</h1>
+                <p class="max-w-xl text-center text-sm font-light opacity-60 mt-4">Exposing sustainable alternative apparel loops. We catalog independent labels respecting environmental and human boundaries to reshape modern consumption awareness.</p>
+                <div class="w-full max-w-xl mt-10">
+                    <input id="searchInput" class="w-full bg-transparent border-b border-primary/20 text-center text-[11px] tracking-[0.2em] py-4 outline-none uppercase" placeholder="SEARCH INDEPENDENT BRANDS..." type="text"/>
                 </div>
-                <div id="filterPanel" class="flex flex-wrap gap-4 md:gap-8 mt-6 w-full max-w-3xl justify-center text-[9px] font-mono tracking-[0.1em] uppercase opacity-60">
-                    <select id="sortData" class="bg-transparent border-b border-primary/20 outline-none pb-1 cursor-pointer">
-                        <option value="none">SORT: DEFAULT</option>
-                        <option value="name-asc">NAME: A TO Z</option>
-                        <option value="name-desc">NAME: Z TO A</option>
-                        <option value="price-asc">PRICE: LOW TO HIGH</option>
-                        <option value="price-desc">PRICE: HIGH TO LOW</option>
-                    </select>
-                    <select id="filterCountry" class="bg-transparent border-b border-primary/20 outline-none pb-1 cursor-pointer">
-                        <option value="all">COUNTRY: ALL</option>
-                    </select>
-                    <select id="filterEco" class="bg-transparent border-b border-primary/20 outline-none pb-1 cursor-pointer">
-                        <option value="all">ECO-FOCUS: ALL</option>
-                        <option value="organic">ORGANIC</option>
-                        <option value="recycled">RECYCLED</option>
-                        <option value="fair">FAIR TRADE</option>
-                        <option value="vegan">VEGAN</option>
-                    </select>
-                </div>
-                <div class="flex gap-8 mt-10 border-t border-line pt-6 w-full max-w-xs justify-center text-[9px] font-mono tracking-[0.2em] uppercase">
-                    <button onclick="setViewMode('stack')" id="btn-view-stack" class="opacity-100 font-bold transition-all hover:opacity-80">Visual View</button>
-                    <span class="opacity-20">/</span>
-                    <button onclick="setViewMode('list')" id="btn-view-list" class="opacity-30 hover:opacity-100 transition-all">Minimal List</button>
+                <div class="flex gap-8 mt-12 text-[9px] font-mono uppercase tracking-[0.2em]">
+                    <button onclick="setViewMode('stack')" id="btn-stack" class="font-bold">Visual View</button>
+                    <span>/</span>
+                    <button onclick="setViewMode('list')" id="btn-list" class="opacity-40 hover:opacity-100">Minimal List</button>
                 </div>
             </header>
-            <div id="view-stack" class="view-mode active w-full flex-col items-center pb-[20vh] pt-12 gap-40"></div>
-            <div id="view-list" class="view-mode w-full max-w-5xl mx-auto px-6 md:px-12 flex-col items-center pb-[30vh] pt-12 gap-10"></div>
+
+            <div id="view-stack" class="view-mode active flex-col items-center gap-40 pb-40"></div>
+            <div id="view-list" class="view-mode flex-col items-center pb-40 px-6"></div>
         </div>
-        <!-- Pages Ecosystem, Traceability, Contribute restent identiques -->
+        
+        <!-- Pages 2, 3, 4 restent ici (les sections que tu as créées) -->
     </div>
 
-    <footer class="w-full border-t border-line bg-background py-12 px-6 md:px-12 mt-auto">
-        <div class="max-w-[120rem] mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="text-xl font-display font-light tracking-[0.3em] uppercase">THE SCOPE</div>
-            <div class="text-center md:text-left text-[9px] font-mono tracking-[0.2em] uppercase opacity-40"><p>Independent Fashion Directory // Establishing circular paradigms.</p><p class="mt-1">&copy; 2026 THE SCOPE ARCHIVE.</p></div>
-        </div>
+    <footer class="w-full border-t border-line py-12 text-center text-[9px] font-mono tracking-[0.2em] uppercase opacity-40">
+        <p>THE SCOPE ARCHIVE // 2026</p>
     </footer>
 
     <script>
         let brandsData = [];
-        let currentViewMode = 'stack'; 
-        let globalObserver = null; 
-
-        window.addEventListener('scroll', () => {
-            const btn = document.getElementById('scrollTopBtn');
-            window.scrollY > 400 ? btn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4') : btn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
-        });
-
-        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
 
         async function loadDatabase() {
             try {
                 const response = await fetch(`brands.json?v=${new Date().getTime()}`);
                 brandsData = await response.json();
-                populateCountryFilter(brandsData);
-                updateCounter(brandsData.length, true);
                 renderBrands(brandsData);
             } catch (error) { console.error("Database error:", error); }
         }
 
-        function populateCountryFilter(data) {
-            const countrySelect = document.getElementById('filterCountry');
-            const countries = [...new Set(data.map(b => b.location))].sort();
-            countries.forEach(c => countrySelect.insertAdjacentHTML('beforeend', `<option value="${c}">${c}</option>`));
-        }
-
-        function updateCounter(count, isInitial = false) {
-            const badge = document.getElementById('brandsCountBadge');
-            badge.innerText = `// ${count} INDEPENDENT BRANDS REFERENCED`;
-        }
-
         function renderBrands(brands) {
-            const stackContainer = document.getElementById('view-stack');
-            const listContainer = document.getElementById('view-list');
-            stackContainer.innerHTML = ''; listContainer.innerHTML = '';
-            if (globalObserver) globalObserver.disconnect();
+            const stack = document.getElementById('view-stack');
+            const list = document.getElementById('view-list');
+            stack.innerHTML = ''; list.innerHTML = '';
+
+            document.getElementById('brandsCountBadge').innerText = `// ${brands.length} INDEPENDENT BRANDS REFERENCED`;
 
             brands.forEach((brand, index) => {
-                const brandNumber = String(index + 1).padStart(2, '0');
-
-                const visualCard = `
-                    <div class="observable-item w-full flex flex-col items-center px-4 relative group">
-                        <div class="w-full max-w-[28rem] md:max-w-[34rem] flex justify-between items-baseline mb-3 font-mono text-[11px] tracking-widest opacity-40">
-                            <span>INDEX_REF // N°${brandNumber}</span>
-                        </div>
-                        <a href="${brand.website}" target="_blank" class="relative w-full max-w-[28rem] md:max-w-[34rem] aspect-[4/5] bg-[#111] overflow-hidden cursor-crosshair">
-                            <img src="${brand.image_url}" class="visual-img w-full h-full object-cover zoom-loop" loading="lazy" />
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent flex flex-col justify-end p-8 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <h2 class="text-3xl text-white font-light uppercase tracking-widest">${brand.name}</h2>
+                const num = String(index + 1).padStart(2, '0');
+                
+                // Visual View Card
+                stack.insertAdjacentHTML('beforeend', `
+                    <div class="w-full flex flex-col items-center px-4">
+                        <div class="w-full max-w-[34rem] mb-4 font-mono text-sm opacity-60">N°${num}</div>
+                        <a href="${brand.website}" target="_blank" class="block w-full max-w-[34rem] aspect-[4/5] bg-black overflow-hidden group cursor-pointer">
+                            <img src="${brand.image_url}" class="w-full h-full object-cover zoom-loop" loading="lazy" />
+                            <div class="absolute inset-0 bg-black/60 flex flex-col justify-end p-10 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <h2 class="text-4xl text-white uppercase">${brand.name}</h2>
+                                <p class="text-white/60 font-mono text-[10px] uppercase mt-2">${brand.style}</p>
                             </div>
                         </a>
-                    </div>`;
-                stackContainer.insertAdjacentHTML('beforeend', visualCard);
+                    </div>
+                `);
 
-                const listCard = `
-                    <div class="observable-item w-full flex justify-center px-4">
-                        <a href="${brand.website}" target="_blank" class="w-full flex flex-col md:flex-row justify-between items-center py-5 border-b border-line/50 cursor-crosshair">
-                            <div class="flex items-center gap-6"><span class="font-mono text-xs opacity-20">${brandNumber}</span><h3 class="text-3xl font-light uppercase tracking-widest">${brand.name}</h3></div>
-                            <div class="font-mono text-[9px] uppercase opacity-40">${brand.style}</div>
-                        </a>
-                    </div>`;
-                listContainer.insertAdjacentHTML('beforeend', listCard);
+                // List View Card
+                list.insertAdjacentHTML('beforeend', `
+                    <a href="${brand.website}" target="_blank" class="w-full max-w-5xl flex items-center justify-between py-8 border-b border-line group cursor-pointer">
+                        <div class="flex items-center gap-12">
+                            <span class="text-sm font-mono opacity-30">${num}</span>
+                            <h3 class="text-3xl font-light uppercase tracking-widest">${brand.name}</h3>
+                        </div>
+                        <div class="text-[10px] font-mono uppercase opacity-50">${brand.location}</div>
+                    </a>
+                `);
             });
-            setupGlobalObserver();
-        }
-
-        function setupGlobalObserver() {
-            globalObserver = new IntersectionObserver((entries) => {
-                entries.forEach(e => e.isIntersecting ? e.target.classList.add('focus-item') : e.target.classList.remove('focus-item'));
-            }, { rootMargin: '-30% 0px -30% 0px' });
-            document.querySelectorAll('.observable-item').forEach(i => globalObserver.observe(i));
-        }
-
-        function showPage(pageId) {
-            document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
-            document.getElementById(`page-${pageId}`).classList.add('active');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function setViewMode(mode) {
-            currentViewMode = mode;
             document.querySelectorAll('.view-mode').forEach(v => v.classList.remove('active'));
             document.getElementById(`view-${mode}`).classList.add('active');
+            document.getElementById('btn-stack').classList.toggle('font-bold', mode === 'stack');
+            document.getElementById('btn-list').classList.toggle('font-bold', mode === 'list');
         }
 
-        function applyFiltersAndSort() {
-            const query = document.getElementById('searchInput').value.toLowerCase().trim();
-            const filtered = brandsData.filter(b => (b.name + b.style + b.location).toLowerCase().includes(query));
-            updateCounter(filtered.length);
+        function showPage(id) {
+            document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
+            document.getElementById(`page-${id}`).classList.add('active');
+        }
+
+        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            const q = e.target.value.toLowerCase();
+            const filtered = brandsData.filter(b => (b.name + b.style + b.location).toLowerCase().includes(q));
             renderBrands(filtered);
-        }
+        });
 
-        document.getElementById('searchInput').addEventListener('input', applyFiltersAndSort);
         loadDatabase();
     </script>
 </body>
