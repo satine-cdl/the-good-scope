@@ -10,63 +10,68 @@
     <style>
         body { background-color: #FCFCFC; color: #111111; overflow-x: hidden; }
         ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #FCFCFC; }
         ::-webkit-scrollbar-thumb { background: #111111; border-radius: 3px; }
-        
         .page-section { display: none; }
         .page-section.active { display: block; }
-        
         .view-mode { display: none; }
         .view-mode.active { display: flex; }
-        
-        /* Animation zoom */
-        @keyframes slowZoom { 0% { transform: scale(1.01); } 100% { transform: scale(1.12); } }
-        .zoom-loop { animation: slowZoom 25s infinite alternate ease-in-out; }
+        .observable-item { transition: all 0.7s ease; opacity: 0.2; transform: scale(0.96); }
+        .observable-item.focus-item { opacity: 1; transform: scale(1); }
     </style>
 </head>
 
 <body class="font-display antialiased flex flex-col min-h-screen">
 
-    <!-- Scroll Top -->
-    <button id="scrollTopBtn" onclick="scrollToTop()" class="fixed bottom-8 right-8 z-50 bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center opacity-0 pointer-events-none transition-all duration-500 shadow-lg hover:scale-110">
-        <span class="material-symbols-outlined font-light">arrow_upward</span>
-    </button>
-
     <!-- Nav -->
     <nav class="w-full flex justify-between items-center px-6 md:px-12 py-8 z-50 fixed top-0 bg-background/90 backdrop-blur-md border-b border-line">
-        <button onclick="showPage('index')" class="text-xl uppercase tracking-[0.3em]">THE SCOPE</button>
+        <button onclick="showPage('index')" class="text-xl tracking-[0.3em] uppercase">THE SCOPE</button>
         <div class="hidden md:flex gap-12">
-            <button onclick="showPage('index')" id="nav-index" class="text-[10px] font-mono tracking-[0.2em] uppercase font-bold border-b border-primary">The Index</button>
+            <button onclick="showPage('index')" class="text-[10px] font-mono tracking-[0.2em] uppercase font-bold border-b border-primary">Index</button>
             <button onclick="showPage('ecosystem')" class="text-[10px] font-mono tracking-[0.2em] uppercase opacity-40 hover:opacity-100">Ecosystem</button>
             <button onclick="showPage('traceability')" class="text-[10px] font-mono tracking-[0.2em] uppercase opacity-40 hover:opacity-100">Traceability</button>
             <button onclick="showPage('contribute')" class="text-[10px] font-mono tracking-[0.2em] uppercase opacity-40 hover:opacity-100">Contribute</button>
         </div>
     </nav>
 
-    <div class="flex-grow pt-32">
+    <!-- CONTENT -->
+    <main class="flex-grow pt-32">
+        <!-- INDEX -->
         <div id="page-index" class="page-section active">
-            <header class="flex flex-col items-center justify-center px-6 mb-16">
-                <div id="brandsCountBadge" class="mb-4 font-mono text-[10px] tracking-[0.2em] uppercase bg-primary text-white px-4 py-1.5 shadow-sm">
-                    // LOADING ARCHIVE...
-                </div>
+            <header class="flex flex-col items-center justify-center px-6 mb-24">
+                <div id="brandsCountBadge" class="mb-4 font-mono text-[10px] tracking-[0.2em] uppercase bg-primary text-white px-4 py-1.5">// LOADING...</div>
                 <h1 class="text-[12vw] font-thin tracking-widest uppercase">THE SCOPE</h1>
-                <p class="max-w-xl text-center text-sm font-light opacity-60 mt-4">Exposing sustainable alternative apparel loops. We catalog independent labels respecting environmental and human boundaries to reshape modern consumption awareness.</p>
+                <p class="max-w-xl text-center text-sm font-light opacity-60 mt-4">Exposing sustainable alternative apparel loops. Cataloging independent labels.</p>
                 <div class="w-full max-w-xl mt-10">
-                    <input id="searchInput" class="w-full bg-transparent border-b border-primary/20 text-center text-[11px] tracking-[0.2em] py-4 outline-none uppercase" placeholder="SEARCH INDEPENDENT BRANDS..." type="text"/>
+                    <input id="searchInput" class="w-full bg-transparent border-b border-primary/20 text-center text-[11px] tracking-[0.2em] py-4 outline-none uppercase" placeholder="SEARCH BRANDS..." type="text"/>
                 </div>
-                <div class="flex gap-8 mt-12 text-[9px] font-mono uppercase tracking-[0.2em]">
-                    <button onclick="setViewMode('stack')" id="btn-stack" class="font-bold">Visual View</button>
+                <div class="flex gap-8 mt-12 text-[9px] font-mono uppercase">
+                    <button onclick="setViewMode('stack')" class="font-bold">Visual</button>
                     <span>/</span>
-                    <button onclick="setViewMode('list')" id="btn-list" class="opacity-40 hover:opacity-100">Minimal List</button>
+                    <button onclick="setViewMode('list')" class="opacity-40">List</button>
                 </div>
             </header>
-
             <div id="view-stack" class="view-mode active flex-col items-center gap-40 pb-40"></div>
             <div id="view-list" class="view-mode flex-col items-center pb-40 px-6"></div>
         </div>
-        
-        <!-- Pages 2, 3, 4 restent ici (les sections que tu as créées) -->
-    </div>
+
+        <!-- ECOSYSTEM -->
+        <div id="page-ecosystem" class="page-section pt-24 max-w-4xl mx-auto px-10">
+            <h2 class="text-6xl uppercase tracking-widest font-thin mb-10">Ecosystem</h2>
+            <p class="text-lg opacity-70">THE SCOPE operates as a decentralized mapping framework engineered to highlight autonomous design systems...</p>
+        </div>
+
+        <!-- TRACEABILITY -->
+        <div id="page-traceability" class="page-section pt-24 max-w-4xl mx-auto px-10">
+            <h2 class="text-6xl uppercase tracking-widest font-thin mb-10">Traceability</h2>
+            <p class="text-lg opacity-70">Our traceability model ensures radical transparency from raw fiber to final garment.</p>
+        </div>
+
+        <!-- CONTRIBUTE -->
+        <div id="page-contribute" class="page-section pt-24 max-w-4xl mx-auto px-10">
+            <h2 class="text-6xl uppercase tracking-widest font-thin mb-10">Contribute</h2>
+            <p class="text-lg opacity-70">Suggest an independent label to our archive.</p>
+        </div>
+    </main>
 
     <footer class="w-full border-t border-line py-12 text-center text-[9px] font-mono tracking-[0.2em] uppercase opacity-40">
         <p>THE SCOPE ARCHIVE // 2026</p>
@@ -74,73 +79,39 @@
 
     <script>
         let brandsData = [];
-
-        async function loadDatabase() {
+        
+        // Initialisation
+        async function loadData() {
             try {
                 const response = await fetch(`brands.json?v=${new Date().getTime()}`);
                 brandsData = await response.json();
-                renderBrands(brandsData);
-            } catch (error) { console.error("Database error:", error); }
+                render(brandsData);
+            } catch (e) { console.error(e); }
         }
 
-        function renderBrands(brands) {
+        function render(brands) {
             const stack = document.getElementById('view-stack');
             const list = document.getElementById('view-list');
             stack.innerHTML = ''; list.innerHTML = '';
-
             document.getElementById('brandsCountBadge').innerText = `// ${brands.length} INDEPENDENT BRANDS REFERENCED`;
 
-            brands.forEach((brand, index) => {
-                const num = String(index + 1).padStart(2, '0');
-                
-                // Visual View Card
-                stack.insertAdjacentHTML('beforeend', `
-                    <div class="w-full flex flex-col items-center px-4">
-                        <div class="w-full max-w-[34rem] mb-4 font-mono text-sm opacity-60">N°${num}</div>
-                        <a href="${brand.website}" target="_blank" class="block w-full max-w-[34rem] aspect-[4/5] bg-black overflow-hidden group cursor-pointer">
-                            <img src="${brand.image_url}" class="w-full h-full object-cover zoom-loop" loading="lazy" />
-                            <div class="absolute inset-0 bg-black/60 flex flex-col justify-end p-10 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <h2 class="text-4xl text-white uppercase">${brand.name}</h2>
-                                <p class="text-white/60 font-mono text-[10px] uppercase mt-2">${brand.style}</p>
-                            </div>
-                        </a>
-                    </div>
-                `);
-
-                // List View Card
-                list.insertAdjacentHTML('beforeend', `
-                    <a href="${brand.website}" target="_blank" class="w-full max-w-5xl flex items-center justify-between py-8 border-b border-line group cursor-pointer">
-                        <div class="flex items-center gap-12">
-                            <span class="text-sm font-mono opacity-30">${num}</span>
-                            <h3 class="text-3xl font-light uppercase tracking-widest">${brand.name}</h3>
-                        </div>
-                        <div class="text-[10px] font-mono uppercase opacity-50">${brand.location}</div>
-                    </a>
-                `);
+            brands.forEach((b, i) => {
+                const num = String(i+1).padStart(2, '0');
+                stack.insertAdjacentHTML('beforeend', `<div class="observable-item w-full flex flex-col items-center px-4"><div class="w-full max-w-[34rem] mb-2 font-mono text-[10px] opacity-40">N°${num}</div><a href="${b.website}" target="_blank" class="w-full max-w-[34rem] aspect-[4/5] bg-black overflow-hidden relative group"><img src="${b.image_url}" class="visual-img w-full h-full object-cover zoom-loop" /><div class="absolute inset-0 bg-black/50 p-10 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end"><h2 class="text-3xl text-white uppercase">${b.name}</h2></div></a></div>`);
+                list.insertAdjacentHTML('beforeend', `<a href="${b.website}" target="_blank" class="observable-item w-full max-w-5xl py-6 border-b border-line flex justify-between items-center"><div class="flex items-center gap-10"><span class="font-mono text-xs opacity-30">${num}</span><h3 class="text-2xl uppercase">${b.name}</h3></div><span class="font-mono text-[10px] opacity-40 uppercase">${b.style}</span></a>`);
             });
-        }
-
-        function setViewMode(mode) {
-            document.querySelectorAll('.view-mode').forEach(v => v.classList.remove('active'));
-            document.getElementById(`view-${mode}`).classList.add('active');
-            document.getElementById('btn-stack').classList.toggle('font-bold', mode === 'stack');
-            document.getElementById('btn-list').classList.toggle('font-bold', mode === 'list');
+            new IntersectionObserver((entries) => entries.forEach(e => e.target.classList.toggle('focus-item', e.isIntersecting)), { rootMargin: '-30% 0px -30% 0px' }).observe(document.querySelector('.observable-item'));
         }
 
         function showPage(id) {
             document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
             document.getElementById(`page-${id}`).classList.add('active');
         }
-
-        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
-
-        document.getElementById('searchInput').addEventListener('input', (e) => {
-            const q = e.target.value.toLowerCase();
-            const filtered = brandsData.filter(b => (b.name + b.style + b.location).toLowerCase().includes(q));
-            renderBrands(filtered);
-        });
-
-        loadDatabase();
+        function setViewMode(mode) {
+            document.querySelectorAll('.view-mode').forEach(v => v.classList.remove('active'));
+            document.getElementById(`view-${mode}`).classList.add('active');
+        }
+        loadData();
     </script>
 </body>
 </html>
