@@ -7,111 +7,418 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@100;200;300;400;500&family=JetBrains+Mono:wght@100;200;300;400&display=swap" rel="stylesheet"/>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        background: "#FCFCFC",
+                        primary: "#111111",
+                        line: "#EAEAEA",
+                    },
+                    fontFamily: {
+                        "display": ["Jost", "sans-serif"],
+                        "mono": ["JetBrains Mono", "monospace"],
+                    }
+                }
+            }
+        }
+    </script>
     <style>
         body { background-color: #FCFCFC; color: #111111; overflow-x: hidden; }
+        
         ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #FCFCFC; }
         ::-webkit-scrollbar-thumb { background: #111111; border-radius: 3px; }
+        
+        @keyframes slowZoom { 0% { transform: scale(1.01); } 100% { transform: scale(1.12); } }
+        .zoom-loop { animation: slowZoom 25s infinite alternate ease-in-out; }
+        
         .page-section { display: none; }
-        .page-section.active { display: block; }
+        .page-section.active { display: block; animation: fadeIn 0.5s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
         .view-mode { display: none; }
         .view-mode.active { display: flex; }
-        .observable-item { transition: all 0.7s ease; opacity: 0.2; transform: scale(0.96); }
-        .observable-item.focus-item { opacity: 1; transform: scale(1); }
+        
+        .observable-item { transition: all 0.7s cubic-bezier(0.25, 1, 0.5, 1); opacity: 0.2; transform: scale(0.96); }
+        .observable-item.focus-item { transform: scale(1); opacity: 1; }
+        .visual-img { filter: grayscale(100%); transition: filter 1s ease; }
+        .focus-item .visual-img { filter: grayscale(0%); }
+
+        select { -webkit-appearance: none; -moz-appearance: none; appearance: none; }
     </style>
 </head>
 
-<body class="font-display antialiased flex flex-col min-h-screen">
+<body class="font-display selection:bg-primary selection:text-white antialiased flex flex-col min-h-screen">
 
-    <!-- Nav -->
+    <button id="scrollTopBtn" onclick="scrollToTop()" class="fixed bottom-8 right-8 z-50 bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center opacity-0 pointer-events-none translate-y-4 transition-all duration-500 shadow-lg hover:scale-110">
+        <span class="material-symbols-outlined font-light">arrow_upward</span>
+    </button>
+
+    <!-- HEADER NAVIGATION -->
     <nav class="w-full flex justify-between items-center px-6 md:px-12 py-8 z-50 fixed top-0 bg-background/90 backdrop-blur-md border-b border-line">
-        <button onclick="showPage('index')" class="text-xl tracking-[0.3em] uppercase">THE SCOPE</button>
+        <button onclick="showPage('index')" class="text-xl font-display font-light tracking-[0.3em] uppercase transition-opacity hover:opacity-60">
+            THE SCOPE
+        </button>
+
         <div class="hidden md:flex gap-12">
-            <button onclick="showPage('index')" class="text-[10px] font-mono tracking-[0.2em] uppercase font-bold border-b border-primary">Index</button>
-            <button onclick="showPage('ecosystem')" class="text-[10px] font-mono tracking-[0.2em] uppercase opacity-40 hover:opacity-100">Ecosystem</button>
-            <button onclick="showPage('traceability')" class="text-[10px] font-mono tracking-[0.2em] uppercase opacity-40 hover:opacity-100">Traceability</button>
-            <button onclick="showPage('contribute')" class="text-[10px] font-mono tracking-[0.2em] uppercase opacity-40 hover:opacity-100">Contribute</button>
+            <button onclick="showPage('index')" id="nav-index" class="text-[10px] font-mono tracking-[0.2em] uppercase pb-1 border-b border-primary font-medium transition-all">The Index</button>
+            <button onclick="showPage('ecosystem')" id="nav-ecosystem" class="text-[10px] font-mono tracking-[0.2em] uppercase pb-1 border-b border-transparent opacity-40 hover:opacity-100 transition-all">Ecosystem</button>
+            <button onclick="showPage('traceability')" id="nav-traceability" class="text-[10px] font-mono tracking-[0.2em] uppercase pb-1 border-b border-transparent opacity-40 hover:opacity-100 transition-all">Traceability</button>
+            <button onclick="showPage('contribute')" id="nav-contribute" class="text-[10px] font-mono tracking-[0.2em] uppercase pb-1 border-b border-transparent opacity-40 hover:opacity-100 transition-all">Contribute</button>
         </div>
     </nav>
 
-    <!-- CONTENT -->
-    <main class="flex-grow pt-32">
-        <!-- INDEX -->
-        <div id="page-index" class="page-section active">
-            <header class="flex flex-col items-center justify-center px-6 mb-24">
-                <div id="brandsCountBadge" class="mb-4 font-mono text-[10px] tracking-[0.2em] uppercase bg-primary text-white px-4 py-1.5">// LOADING...</div>
-                <h1 class="text-[12vw] font-thin tracking-widest uppercase">THE SCOPE</h1>
-                <p class="max-w-xl text-center text-sm font-light opacity-60 mt-4">Exposing sustainable alternative apparel loops. Cataloging independent labels.</p>
-                <div class="w-full max-w-xl mt-10">
-                    <input id="searchInput" class="w-full bg-transparent border-b border-primary/20 text-center text-[11px] tracking-[0.2em] py-4 outline-none uppercase" placeholder="SEARCH BRANDS..." type="text"/>
+    <!-- CONTENT BACKBONE -->
+    <div class="flex-grow">
+
+        <!-- PAGE 1 : THE INDEX -->
+        <div id="page-index" class="page-section active pt-32">
+            
+            <header id="main-header" class="w-full min-h-[60vh] flex flex-col items-center justify-center px-6 transition-all duration-700 ease-in-out">
+                
+                <div id="brandsCountBadge" class="mb-4 font-mono text-[10px] tracking-[0.2em] uppercase text-white bg-primary px-4 py-1.5 font-medium rounded-none shadow-sm transition-all">
+                    FETCHING DATASETS...
                 </div>
-                <div class="flex gap-8 mt-12 text-[9px] font-mono uppercase">
-                    <button onclick="setViewMode('stack')" class="font-bold">Visual</button>
-                    <span>/</span>
-                    <button onclick="setViewMode('list')" class="opacity-40">List</button>
+
+                <h1 id="main-title" class="text-[14vw] md:text-[10vw] leading-none font-display font-thin tracking-widest uppercase text-center transition-all duration-700">
+                    THE SCOPE
+                </h1>
+
+                <p id="main-intro" class="mt-6 text-sm font-display font-light max-w-xl text-center tracking-wide leading-relaxed opacity-60 transition-all duration-500">
+                    Exposing sustainable alternative apparel loops. We catalog independent labels respecting environmental and human boundaries to reshape modern consumption awareness.
+                </p>
+                
+                <!-- Core Search Input -->
+                <div class="w-full max-w-xl relative mt-10 group">
+                    <input id="searchInput" class="w-full bg-transparent border-0 border-b border-primary/20 focus:border-primary focus:ring-0 font-mono text-center text-[11px] tracking-[0.2em] px-0 py-4 outline-none placeholder:text-primary/30 uppercase transition-colors" placeholder="Type to search independent brands..." type="text"/>
+                    <span class="material-symbols-outlined absolute right-0 bottom-4 opacity-30 font-light">search</span>
+                </div>
+
+                <!-- Filters & Sorting (UPDATED) -->
+                <div id="filterPanel" class="flex flex-wrap gap-4 md:gap-8 mt-6 w-full max-w-3xl justify-center text-[9px] font-mono tracking-[0.1em] uppercase opacity-60 transition-all duration-500">
+                    
+                    <select id="sortData" class="bg-transparent border-b border-primary/20 outline-none pb-1 cursor-pointer focus:border-primary focus:opacity-100 hover:opacity-100 transition-opacity">
+                        <option value="none">SORT: DEFAULT</option>
+                        <option value="name-asc">NAME: A TO Z</option>
+                        <option value="name-desc">NAME: Z TO A</option>
+                        <option value="price-asc">PRICE: LOW TO HIGH</option>
+                        <option value="price-desc">PRICE: HIGH TO LOW</option>
+                    </select>
+
+                    <select id="filterCountry" class="bg-transparent border-b border-primary/20 outline-none pb-1 cursor-pointer focus:border-primary focus:opacity-100 hover:opacity-100 transition-opacity max-w-[120px] md:max-w-none">
+                        <option value="all">COUNTRY: ALL</option>
+                        <!-- Populated dynamically by JS -->
+                    </select>
+
+                    <select id="filterEco" class="bg-transparent border-b border-primary/20 outline-none pb-1 cursor-pointer focus:border-primary focus:opacity-100 hover:opacity-100 transition-opacity max-w-[150px] md:max-w-none">
+                        <option value="all">ECO-FOCUS: ALL</option>
+                        <option value="organic">ORGANIC & NATURAL</option>
+                        <option value="recycled">RECYCLED & CIRCULAR</option>
+                        <option value="fair">FAIR TRADE & ETHICS</option>
+                        <option value="vegan">VEGAN & ANIMAL FREE</option>
+                        <option value="carbon">CLIMATE & ENERGY</option>
+                        <option value="waste">ZERO WASTE & SLOW</option>
+                    </select>
+                </div>
+
+                <!-- View Switcher -->
+                <div class="flex gap-8 mt-10 border-t border-line pt-6 w-full max-w-xs justify-center text-[9px] font-mono tracking-[0.2em] uppercase">
+                    <button onclick="setViewMode('stack')" id="btn-view-stack" class="opacity-100 font-bold transition-all hover:opacity-80">Visual View</button>
+                    <span class="opacity-20">/</span>
+                    <button onclick="setViewMode('list')" id="btn-view-list" class="opacity-30 hover:opacity-100 transition-all">Minimal List</button>
                 </div>
             </header>
-            <div id="view-stack" class="view-mode active flex-col items-center gap-40 pb-40"></div>
-            <div id="view-list" class="view-mode flex-col items-center pb-40 px-6"></div>
+
+            <!-- VIEW INDEX GRID A : VISUAL VIEW -->
+            <div id="view-stack" class="view-mode active w-full flex-col items-center pb-[20vh] pt-12 gap-40">
+                <!-- Programmatically populated -->
+            </div>
+
+            <!-- VIEW INDEX GRID B : MINIMAL LIST -->
+            <div id="view-list" class="view-mode w-full max-w-5xl mx-auto px-6 md:px-12 flex-col items-center pb-[30vh] pt-12 gap-10">
+                <!-- Programmatically populated -->
+            </div>
         </div>
 
-        <!-- ECOSYSTEM -->
-        <div id="page-ecosystem" class="page-section pt-24 max-w-4xl mx-auto px-10">
-            <h2 class="text-6xl uppercase tracking-widest font-thin mb-10">Ecosystem</h2>
-            <p class="text-lg opacity-70">THE SCOPE operates as a decentralized mapping framework engineered to highlight autonomous design systems...</p>
+        <!-- PAGE 2 : ECOSYSTEM -->
+        <div id="page-ecosystem" class="page-section pt-48 max-w-5xl mx-auto px-6 md:px-12 pb-48">
+            <span class="text-[10px] font-mono tracking-[0.4em] uppercase opacity-40">Section // 02</span>
+            <h2 class="text-5xl md:text-7xl font-display font-thin tracking-widest uppercase mt-4 mb-16">ECOSYSTEM</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 font-display font-light text-base leading-relaxed tracking-wide text-primary/80">
+                <div class="flex flex-col gap-8">
+                    <p class="text-2xl text-primary font-normal leading-snug">THE SCOPE operates as a decentralized mapping framework engineered to highlight autonomous design systems.</p>
+                    <p class="opacity-70">Our directory architectural model analyzes independent apparel structures based on their real circular paradigm. By mapping these low-impact alternative circuits, we seek to balance the standard distribution network.</p>
+                </div>
+                <div class="flex flex-col gap-12 border-l border-line pl-0 md:pl-16">
+                    <div class="flex items-start gap-4">
+                        <span class="material-symbols-outlined text-3xl font-light opacity-50">recycling</span>
+                        <div><h4 class="font-mono text-[10px] tracking-[0.2em] uppercase text-primary mb-2 font-bold">01 // Circular Materials</h4><p class="text-xs opacity-70 font-mono leading-relaxed">Prioritizing certified organic fibers, deadstock fabrics rescue matrices, and mono-material constructions engineered for endless structural breakdown.</p></div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <span class="material-symbols-outlined text-3xl font-light opacity-50">diversity_1</span>
+                        <div><h4 class="font-mono text-[10px] tracking-[0.2em] uppercase text-primary mb-2 font-bold">02 // Human Ethics</h4><p class="text-xs opacity-70 font-mono leading-relaxed">Enforcing total transparency regarding living wages, safe workshop dynamics, and localized community manufacturing systems.</p></div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <span class="material-symbols-outlined text-3xl font-light opacity-50">inventory_2</span>
+                        <div><h4 class="font-mono text-[10px] tracking-[0.2em] uppercase text-primary mb-2 font-bold">03 // Controlled Volume</h4><p class="text-xs opacity-70 font-mono leading-relaxed">Advocating for pre-order matrices, seasonless capsules, and custom tailoring workflows to prevent industrial inventory build-up.</p></div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- TRACEABILITY -->
-        <div id="page-traceability" class="page-section pt-24 max-w-4xl mx-auto px-10">
-            <h2 class="text-6xl uppercase tracking-widest font-thin mb-10">Traceability</h2>
-            <p class="text-lg opacity-70">Our traceability model ensures radical transparency from raw fiber to final garment.</p>
+        <!-- PAGE 3 : TRACEABILITY -->
+        <div id="page-traceability" class="page-section pt-48 max-w-5xl mx-auto px-6 md:px-12 pb-48">
+            <span class="text-[10px] font-mono tracking-[0.4em] uppercase opacity-40">Section // 03</span>
+            <h2 class="text-5xl md:text-7xl font-display font-thin tracking-widest uppercase mt-4 mb-24">TRACEABILITY</h2>
+            <div class="flex flex-col gap-0 font-display relative before:absolute before:inset-0 before:ml-[28px] md:before:ml-[50%] before:-translate-x-px md:before:translate-x-0 before:w-[1px] before:bg-line">
+                <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group w-full mb-24">
+                    <div class="flex items-center justify-center w-14 h-14 rounded-full border border-primary bg-background shrink-0 md:order-1 md:group-odd:-ml-7 md:group-even:-mr-7 z-10 shadow-sm transition-transform group-hover:scale-110"><span class="material-symbols-outlined font-light">agriculture</span></div>
+                    <div class="w-[calc(100%-4rem)] md:w-[calc(50%-3rem)] bg-white border border-line p-6 shadow-sm"><span class="font-mono text-[9px] tracking-widest opacity-40 mb-2 block">TIER 1</span><h3 class="text-xl uppercase tracking-wider font-light mb-3">Agricultural Root Source</h3><p class="text-[11px] font-mono opacity-60 leading-relaxed">Tracing fibers directly back to regenerative farming networks, organic soil cultures, and non-hazardous botanical raw materials.</p></div>
+                </div>
+                <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group w-full mb-24">
+                    <div class="flex items-center justify-center w-14 h-14 rounded-full border border-primary bg-background shrink-0 md:order-1 md:group-odd:-ml-7 md:group-even:-mr-7 z-10 shadow-sm transition-transform group-hover:scale-110"><span class="material-symbols-outlined font-light">water_drop</span></div>
+                    <div class="w-[calc(100%-4rem)] md:w-[calc(50%-3rem)] bg-white border border-line p-6 shadow-sm"><span class="font-mono text-[9px] tracking-widest opacity-40 mb-2 block">TIER 2</span><h3 class="text-xl uppercase tracking-wider font-light mb-3">Clean Spinning & Dyeing</h3><p class="text-[11px] font-mono opacity-60 leading-relaxed">Monitoring closed-loop chemical purification systems and water recycling protocols. No heavy metals or chemical runoff are allowed.</p></div>
+                </div>
+                <div class="relative flex items-center justify-between md:justify-normal md:odd:flex-row-reverse group w-full">
+                    <div class="flex items-center justify-center w-14 h-14 rounded-full border border-primary bg-background shrink-0 md:order-1 md:group-odd:-ml-7 md:group-even:-mr-7 z-10 shadow-sm transition-transform group-hover:scale-110"><span class="material-symbols-outlined font-light">precision_manufacturing</span></div>
+                    <div class="w-[calc(100%-4rem)] md:w-[calc(50%-3rem)] bg-white border border-line p-6 shadow-sm"><span class="font-mono text-[9px] tracking-widest opacity-40 mb-2 block">TIER 3</span><h3 class="text-xl uppercase tracking-wider font-light mb-3">Ethical Atelier Mapping</h3><p class="text-[11px] font-mono opacity-60 leading-relaxed">Full declaration of final crafting locations. We verify fair trade labor environments and total structural transparency.</p></div>
+                </div>
+            </div>
         </div>
 
-        <!-- CONTRIBUTE -->
-        <div id="page-contribute" class="page-section pt-24 max-w-4xl mx-auto px-10">
-            <h2 class="text-6xl uppercase tracking-widest font-thin mb-10">Contribute</h2>
-            <p class="text-lg opacity-70">Suggest an independent label to our archive.</p>
+        <!-- PAGE 4 : CONTRIBUTE -->
+        <div id="page-contribute" class="page-section pt-48 max-w-3xl mx-auto px-6 md:px-12 pb-48">
+            <span class="text-[10px] font-mono tracking-[0.4em] uppercase opacity-40">Section // 04</span>
+            <h2 class="text-5xl md:text-7xl font-display font-thin tracking-widest uppercase mt-4 mb-16">CONTRIBUTE</h2>
+            <p class="font-display font-light text-xl tracking-wide mb-16 opacity-80 leading-relaxed">Our platform scales via collaborative submission. Suggest adding an independent label following strict ecological protocols to the structural index.</p>
+            <form class="flex flex-col gap-10 w-full font-mono text-xs" onsubmit="event.preventDefault();">
+                <div class="w-full relative border-b border-primary/20 py-2 group"><label class="opacity-40 uppercase tracking-widest flex items-center gap-2 mb-2 transition-opacity group-focus-within:opacity-100 group-focus-within:text-primary"><span class="material-symbols-outlined text-[14px]">sell</span> 01 / Label Identification</label><input class="w-full bg-transparent outline-none uppercase tracking-widest font-display font-light text-base" placeholder="ENTER BRAND NAME..." type="text"/></div>
+                <div class="w-full relative border-b border-primary/20 py-2 group"><label class="opacity-40 uppercase tracking-widest flex items-center gap-2 mb-2 transition-opacity group-focus-within:opacity-100 group-focus-within:text-primary"><span class="material-symbols-outlined text-[14px]">public</span> 02 / Digital HQ Location</label><input class="w-full bg-transparent outline-none uppercase tracking-widest font-display font-light text-base" placeholder="URL // COUNTRY OF ORIGIN..." type="text"/></div>
+                <div class="w-full relative border-b border-primary/20 py-2 group"><label class="opacity-40 uppercase tracking-widest flex items-center gap-2 mb-2 transition-opacity group-focus-within:opacity-100 group-focus-within:text-primary"><span class="material-symbols-outlined text-[14px]">policy</span> 03 / Ethical Documentations</label><input class="w-full bg-transparent outline-none uppercase tracking-widest font-display font-light text-base" placeholder="LIST KEY ECO-COMMITMENTS..." type="text"/></div>
+                <button class="mt-8 border border-primary uppercase tracking-[0.3em] font-display font-light text-xs py-5 w-full transition-all hover:bg-primary hover:text-white flex justify-center items-center gap-3">Submit Archive Proposal <span class="material-symbols-outlined text-[16px]">arrow_forward</span></button>
+            </form>
         </div>
-    </main>
 
-    <footer class="w-full border-t border-line py-12 text-center text-[9px] font-mono tracking-[0.2em] uppercase opacity-40">
-        <p>THE SCOPE ARCHIVE // 2026</p>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="w-full border-t border-line bg-background py-12 px-6 md:px-12 mt-auto">
+        <div class="max-w-[120rem] mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-xl font-display font-light tracking-[0.3em] uppercase">THE SCOPE</div>
+            <div class="text-center md:text-left text-[9px] font-mono tracking-[0.2em] uppercase opacity-40"><p>Independent Fashion Directory // Establishing circular paradigms.</p><p class="mt-1">&copy; 2026 THE SCOPE ARCHIVE. All rights reserved.</p></div>
+            <div class="flex gap-6"><a href="#" class="text-[9px] font-mono tracking-[0.2em] uppercase opacity-40 hover:opacity-100 transition-opacity">Instagram</a><a href="#" class="text-[9px] font-mono tracking-[0.2em] uppercase opacity-40 hover:opacity-100 transition-opacity">LinkedIn</a><a href="#" class="text-[9px] font-mono tracking-[0.2em] uppercase opacity-40 hover:opacity-100 transition-opacity">Contact</a></div>
+        </div>
     </footer>
 
     <script>
         let brandsData = [];
-        
-        // Initialisation
-        async function loadData() {
+        let currentViewMode = 'stack'; 
+        let globalObserver = null; 
+
+        window.addEventListener('scroll', () => {
+            const btn = document.getElementById('scrollTopBtn');
+            window.scrollY > 400 ? btn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4') : btn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+        });
+
+        function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+        async function loadDatabase() {
             try {
                 const response = await fetch(`brands.json?v=${new Date().getTime()}`);
                 brandsData = await response.json();
-                render(brandsData);
-            } catch (e) { console.error(e); }
+                
+                populateCountryFilter(brandsData);
+                updateCounter(brandsData.length, true);
+                renderBrands(brandsData);
+            } catch (error) {
+                console.error("Database initialization fault:", error);
+            }
         }
 
-        function render(brands) {
-            const stack = document.getElementById('view-stack');
-            const list = document.getElementById('view-list');
-            stack.innerHTML = ''; list.innerHTML = '';
-            document.getElementById('brandsCountBadge').innerText = `// ${brands.length} INDEPENDENT BRANDS REFERENCED`;
+        // On ne peuple que le pays, l'éco-focus est déjà géré par les grandes catégories définies en HTML
+        function populateCountryFilter(data) {
+            const countrySelect = document.getElementById('filterCountry');
+            const countries = [...new Set(data.map(b => b.location))].sort();
+            countries.forEach(c => countrySelect.insertAdjacentHTML('beforeend', `<option value="${c}">${c}</option>`));
+        }
 
-            brands.forEach((b, i) => {
-                const num = String(i+1).padStart(2, '0');
-                stack.insertAdjacentHTML('beforeend', `<div class="observable-item w-full flex flex-col items-center px-4"><div class="w-full max-w-[34rem] mb-2 font-mono text-[10px] opacity-40">N°${num}</div><a href="${b.website}" target="_blank" class="w-full max-w-[34rem] aspect-[4/5] bg-black overflow-hidden relative group"><img src="${b.image_url}" class="visual-img w-full h-full object-cover zoom-loop" /><div class="absolute inset-0 bg-black/50 p-10 opacity-0 group-hover:opacity-100 transition-opacity flex flex-col justify-end"><h2 class="text-3xl text-white uppercase">${b.name}</h2></div></a></div>`);
-                list.insertAdjacentHTML('beforeend', `<a href="${b.website}" target="_blank" class="observable-item w-full max-w-5xl py-6 border-b border-line flex justify-between items-center"><div class="flex items-center gap-10"><span class="font-mono text-xs opacity-30">${num}</span><h3 class="text-2xl uppercase">${b.name}</h3></div><span class="font-mono text-[10px] opacity-40 uppercase">${b.style}</span></a>`);
+        function updateCounter(count, isInitial = false) {
+            const badge = document.getElementById('brandsCountBadge');
+            badge.innerText = isInitial ? `// REGISTERED ARCHIVE: ${count} INDEPENDENT LABELS` : `// MATCHING ENTRIES: ${count} LABELS FOUND`;
+        }
+
+        function renderBrands(brands) {
+            const stackContainer = document.getElementById('view-stack');
+            const listContainer = document.getElementById('view-list');
+            
+            stackContainer.innerHTML = '';
+            listContainer.innerHTML = '';
+
+            if (globalObserver) globalObserver.disconnect();
+
+            if (brands.length === 0) {
+                const errorMsg = "<p class='text-center text-[10px] font-mono tracking-widest uppercase opacity-40 my-24 w-full'>0 elements matching your query.</p>";
+                stackContainer.innerHTML = errorMsg;
+                listContainer.innerHTML = errorMsg;
+                return;
+            }
+
+            brands.forEach((brand, index) => {
+                const brandNumber = String(index + 1).padStart(2, '0');
+
+                // VISUAL VIEW
+                const visualCard = `
+                    <div class="observable-item w-full flex flex-col items-center px-4 relative group">
+                        <div class="w-full max-w-[28rem] md:max-w-[34rem] flex justify-between items-baseline mb-3 font-mono text-[11px] tracking-widest text-primary/80 font-medium">
+                            <span>INDEX_REF // N°${brandNumber}</span>
+                            <span class="opacity-30 tracking-wider">${brand.location}</span>
+                        </div>
+                        <a href="${brand.website}" target="_blank" rel="noopener noreferrer" class="relative w-full max-w-[28rem] md:max-w-[34rem] aspect-[4/5] bg-[#111] overflow-hidden shadow-[0_30px_60px_rgba(0,0,0,0.05)] cursor-crosshair">
+                            <img src="${brand.image_url}" alt="${brand.name}" onerror="this.src='https://images.unsplash.com/photo-1542272604-787c3835535d?q=80&w=800&auto=format&fit=crop'" class="visual-img w-full h-full object-cover zoom-loop" loading="lazy" />
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent flex flex-col justify-end p-8 md:p-12 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                <h2 class="text-4xl md:text-5xl font-display font-light uppercase tracking-[0.1em] text-white">${brand.name}</h2>
+                                <p class="text-[9px] md:text-[10px] font-mono tracking-[0.3em] uppercase text-white/60 mt-3">${brand.style}</p>
+                                <div class="w-full h-[1px] bg-white/20 mt-6 mb-4"></div>
+                                <div class="flex justify-between items-center w-full">
+                                    <div class="flex flex-wrap gap-2">
+                                        ${brand.commitments.slice(0, 2).map(c => `<span class="text-[7px] font-mono uppercase tracking-[0.1em] border border-white/30 text-white/80 px-2 py-1">${c}</span>`).join('')}
+                                    </div>
+                                    <span class="text-[9px] font-mono uppercase tracking-[0.2em] text-white/50">${brand.location}</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                `;
+                stackContainer.insertAdjacentHTML('beforeend', visualCard);
+
+                // MINIMAL LIST
+                const listCard = `
+                    <div class="observable-item w-full flex justify-center px-4">
+                        <a href="${brand.website}" target="_blank" rel="noopener noreferrer" class="w-full flex flex-col md:flex-row justify-between items-start md:items-center py-5 border-b border-line/50 group cursor-crosshair gap-4 relative">
+                            <div class="flex items-center w-full md:w-1/3 gap-6">
+                                <span class="font-mono text-xs tracking-widest text-primary/70 font-semibold min-w-[2rem]">${brandNumber}</span>
+                                <h3 class="font-display text-2xl md:text-3xl font-light tracking-[0.15em] uppercase text-primary group-hover:translate-x-2 transition-transform duration-300">${brand.name}</h3>
+                            </div>
+                            <div class="flex flex-col md:items-center w-full md:w-1/3 gap-2">
+                                <span class="font-mono text-[9px] tracking-[0.2em] uppercase opacity-40">${brand.style}</span>
+                                <div class="flex flex-wrap gap-2">
+                                    ${brand.commitments.map(c => `<span class="text-[7px] font-mono uppercase tracking-wider text-primary border border-primary/20 px-2 py-0.5">${c}</span>`).join('')}
+                                </div>
+                            </div>
+                            <div class="flex flex-col items-start md:items-end w-full md:w-1/3 font-mono text-[10px] tracking-wider uppercase opacity-50 gap-1">
+                                <span>${brand.location}</span>
+                                <span>${brand.price}</span>
+                            </div>
+                        </a>
+                    </div>
+                `;
+                listContainer.insertAdjacentHTML('beforeend', listCard);
             });
-            new IntersectionObserver((entries) => entries.forEach(e => e.target.classList.toggle('focus-item', e.isIntersecting)), { rootMargin: '-30% 0px -30% 0px' }).observe(document.querySelector('.observable-item'));
+
+            setupGlobalObserver();
         }
 
-        function showPage(id) {
-            document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
-            document.getElementById(`page-${id}`).classList.add('active');
+        function setupGlobalObserver() {
+            const items = document.querySelectorAll('.observable-item');
+            globalObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => entry.isIntersecting ? entry.target.classList.add('focus-item') : entry.target.classList.remove('focus-item'));
+            }, { root: null, rootMargin: '-30% 0px -30% 0px', threshold: 0 });
+            items.forEach(item => globalObserver.observe(item));
         }
+
+        function showPage(pageId) {
+            document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
+            document.getElementById(`page-${pageId}`).classList.add('active');
+            document.querySelectorAll('nav button').forEach(b => { b.classList.add('opacity-40', 'border-transparent'); b.classList.remove('font-medium', 'border-primary'); });
+            const activeNav = document.getElementById(`nav-${pageId}`);
+            if(activeNav){ activeNav.classList.remove('opacity-40', 'border-transparent'); activeNav.classList.add('font-medium', 'border-primary'); }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
         function setViewMode(mode) {
+            currentViewMode = mode;
             document.querySelectorAll('.view-mode').forEach(v => v.classList.remove('active'));
             document.getElementById(`view-${mode}`).classList.add('active');
+            document.getElementById('btn-view-stack').classList.toggle('font-bold', mode === 'stack');
+            document.getElementById('btn-view-stack').classList.toggle('opacity-30', mode !== 'stack');
+            document.getElementById('btn-view-list').classList.toggle('font-bold', mode === 'list');
+            document.getElementById('btn-view-list').classList.toggle('opacity-30', mode !== 'list');
         }
-        loadData();
+
+        // ALGORITHME DE TRI ET DE FILTRAGE INTELLIGENT
+        function applyFiltersAndSort() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            const sortVal = document.getElementById('sortData').value;
+            const countryVal = document.getElementById('filterCountry').value;
+            const ecoVal = document.getElementById('filterEco').value;
+
+            // 1. Filtrer
+            let filtered = brandsData.filter(brand => {
+                // Recherche texte libre
+                const searchString = (brand.name + " " + brand.style + " " + brand.location + " " + brand.commitments.join(" ")).toLowerCase();
+                const matchSearch = searchString.includes(query);
+                
+                // Filtre de Pays
+                const matchCountry = countryVal === 'all' || brand.location === countryVal;
+                
+                // Filtre d'Éco-responsabilité (Recherche par mots-clés dans le tableau commitments)
+                let matchEco = true;
+                if (ecoVal !== 'all') {
+                    const commitmentsStr = brand.commitments.join(" ").toLowerCase();
+                    if (ecoVal === 'organic') matchEco = commitmentsStr.includes('organic') || commitmentsStr.includes('natural') || commitmentsStr.includes('plant');
+                    else if (ecoVal === 'recycled') matchEco = commitmentsStr.includes('recycle') || commitmentsStr.includes('circular') || commitmentsStr.includes('deadstock') || commitmentsStr.includes('upcycl');
+                    else if (ecoVal === 'fair') matchEco = commitmentsStr.includes('fair') || commitmentsStr.includes('wage') || commitmentsStr.includes('ethic') || commitmentsStr.includes('social');
+                    else if (ecoVal === 'vegan') matchEco = commitmentsStr.includes('vegan') || commitmentsStr.includes('animal');
+                    else if (ecoVal === 'carbon') matchEco = commitmentsStr.includes('carbon') || commitmentsStr.includes('climate') || commitmentsStr.includes('energy') || commitmentsStr.includes('solar');
+                    else if (ecoVal === 'waste') matchEco = commitmentsStr.includes('waste') || commitmentsStr.includes('slow') || commitmentsStr.includes('pre-order');
+                }
+                
+                return matchSearch && matchCountry && matchEco;
+            });
+
+            // 2. Trier
+            if (sortVal === 'price-asc') {
+                filtered.sort((a, b) => a.price.length - b.price.length);
+            } else if (sortVal === 'price-desc') {
+                filtered.sort((a, b) => b.price.length - a.price.length);
+            } else if (sortVal === 'name-asc') {
+                filtered.sort((a, b) => a.name.localeCompare(b.name));
+            } else if (sortVal === 'name-desc') {
+                filtered.sort((a, b) => b.name.localeCompare(a.name));
+            }
+
+            // 3. UI Auto-Ajustement (Réduction du Header si filtres actifs)
+            const header = document.getElementById('main-header');
+            const title = document.getElementById('main-title');
+            const intro = document.getElementById('main-intro');
+
+            if (query.length > 0 || sortVal !== 'none' || countryVal !== 'all' || ecoVal !== 'all') {
+                if (currentViewMode !== 'list') setViewMode('list');
+                header.classList.replace('min-h-[60vh]', 'min-h-[35vh]');
+                title.classList.replace('text-[14vw]', 'text-[6vw]');
+                title.classList.replace('md:text-[10vw]', 'md:text-[4vw]');
+                intro.classList.add('opacity-0', 'h-0', 'overflow-hidden', 'mt-0');
+            } else {
+                header.classList.replace('min-h-[35vh]', 'min-h-[60vh]');
+                title.classList.replace('text-[6vw]', 'text-[14vw]');
+                title.classList.replace('md:text-[4vw]', 'md:text-[10vw]');
+                intro.classList.remove('opacity-0', 'h-0', 'overflow-hidden', 'mt-0');
+            }
+
+            updateCounter(filtered.length, false);
+            renderBrands(filtered);
+        }
+
+        // Connecter les menus aux fonctions
+        document.getElementById('searchInput').addEventListener('input', applyFiltersAndSort);
+        document.getElementById('sortData').addEventListener('change', applyFiltersAndSort);
+        document.getElementById('filterCountry').addEventListener('change', applyFiltersAndSort);
+        document.getElementById('filterEco').addEventListener('change', applyFiltersAndSort);
+
+        loadDatabase();
     </script>
 </body>
 </html>
