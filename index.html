@@ -20,6 +20,23 @@
                     fontFamily: {
                         "display": ["Jost", "sans-serif"],
                         "mono": ["JetBrains Mono", "monospace"],
+                    },
+                    // Activation officielle des animations sur 10 secondes dans Tailwind
+                    animation: {
+                        'title-reveal': 'titleReveal 10s cubic-bezier(0.1, 0.8, 0.2, 1) forwards',
+                        'fade-up-slow-1': 'fadeUpDelay 10s cubic-bezier(0.1, 0.8, 0.2, 1) 1.5s forwards',
+                        'fade-up-slow-2': 'fadeUpDelay 10s cubic-bezier(0.1, 0.8, 0.2, 1) 3s forwards',
+                        'fade-up-slow-3': 'fadeUpDelay 10s cubic-bezier(0.1, 0.8, 0.2, 1) 4.5s forwards',
+                    },
+                    keyframes: {
+                        titleReveal: {
+                            '0%': { opacity: '0', transform: 'translateY(60px)', 'letter-spacing': '-0.05em', filter: 'blur(12px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)', 'letter-spacing': '0.1em', filter: 'blur(0)' }
+                        },
+                        fadeUpDelay: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)', filter: 'blur(4px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)', filter: 'blur(0)' }
+                        }
                     }
                 }
             }
@@ -31,9 +48,6 @@
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #111111; border-radius: 3px; }
-        
-        @keyframes slowZoom { 0% { transform: scale(1.01); } 100% { transform: scale(1.12); } }
-        .zoom-loop { animation: slowZoom 25s infinite alternate ease-in-out; }
         
         .page-section { display: none; }
         .page-section.active { display: block; animation: fadeIn 0.5s ease-out forwards; }
@@ -62,32 +76,6 @@
             z-index: -10; 
             pointer-events: none; 
         }
-
-        /* --- NOUVELLES ANIMATIONS D'OUVERTURE --- */
-        @keyframes titleReveal {
-            0% { opacity: 0; transform: translateY(40px); letter-spacing: 0.02em; filter: blur(8px); }
-            100% { opacity: 1; transform: translateY(0); letter-spacing: 0.1em; filter: blur(0); }
-        }
-        @keyframes fadeUpDelay {
-            0% { opacity: 0; transform: translateY(20px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-        
-        .animate-title {
-            animation: titleReveal 1.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-        }
-        .animate-fade-up-1 {
-            opacity: 0;
-            animation: fadeUpDelay 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 0.6s forwards;
-        }
-        .animate-fade-up-2 {
-            opacity: 0;
-            animation: fadeUpDelay 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 0.9s forwards;
-        }
-        .animate-fade-up-3 {
-            opacity: 0;
-            animation: fadeUpDelay 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 1.2s forwards;
-        }
     </style>
 </head>
 
@@ -99,7 +87,7 @@
         <span class="material-symbols-outlined font-light">arrow_upward</span>
     </button>
 
-    <nav class="w-full flex justify-between items-center px-6 md:px-12 py-8 z-50 fixed top-0 bg-background/90 backdrop-blur-md border-b border-line animate-fade-up-1">
+    <nav class="w-full flex justify-between items-center px-6 md:px-12 py-8 z-50 fixed top-0 bg-background/90 backdrop-blur-md border-b border-line animate-title-reveal">
         <button onclick="showPage('index')" class="text-xl font-display font-light tracking-[0.3em] uppercase transition-opacity hover:opacity-60">
             THE SCOPE
         </button>
@@ -113,28 +101,29 @@
     </nav>
 
     <div class="flex-grow">
+
         <div id="page-index" class="page-section active pt-32">
             
             <header id="main-header" class="w-full min-h-[60vh] flex flex-col items-center justify-center px-6 transition-all duration-700 ease-in-out">
                 
-                <div id="brandsCountBadge" class="animate-fade-up-1 mb-4 font-mono text-[10px] tracking-[0.2em] uppercase text-white bg-primary px-4 py-1.5 font-medium rounded-none shadow-sm transition-all">
+                <div id="brandsCountBadge" class="animate-fade-up-slow-1 mb-4 font-mono text-[10px] tracking-[0.2em] uppercase text-white bg-primary px-4 py-1.5 font-medium rounded-none shadow-sm transition-all">
                     FETCHING DATASETS...
                 </div>
 
-                <h1 id="main-title" class="animate-title text-[14vw] md:text-[10vw] leading-none font-display font-thin tracking-widest uppercase text-center transition-all duration-700">
+                <h1 id="main-title" class="animate-title-reveal text-[14vw] md:text-[10vw] leading-none font-display font-thin tracking-widest uppercase text-center transition-all duration-700">
                     THE SCOPE
                 </h1>
 
-                <p id="main-intro" class="animate-fade-up-2 mt-6 text-sm font-display font-light max-w-xl text-center tracking-wide leading-relaxed opacity-60 transition-all duration-500 bg-white/40 p-4 rounded-xl backdrop-blur-sm">
+                <p id="main-intro" class="animate-fade-up-slow-2 mt-6 text-sm font-display font-light max-w-xl text-center tracking-wide leading-relaxed opacity-60 transition-all duration-500 bg-white/40 p-4 rounded-xl backdrop-blur-sm">
                     Exposing sustainable alternative apparel loops. We catalog independent labels respecting environmental and human boundaries to reshape modern consumption awareness.
                 </p>
                 
-                <div class="animate-fade-up-3 w-full max-w-xl relative mt-10 group bg-white/70 backdrop-blur-md rounded-md">
+                <div class="animate-fade-up-slow-3 w-full max-w-xl relative mt-10 group bg-white/70 backdrop-blur-md rounded-md">
                     <input id="searchInput" class="w-full bg-transparent border-0 border-b border-primary/20 focus:border-primary focus:ring-0 font-mono text-center text-[11px] tracking-[0.2em] px-0 py-4 outline-none placeholder:text-primary/30 uppercase transition-colors" placeholder="Type to search independent brands..." type="text"/>
                     <span class="material-symbols-outlined absolute right-4 bottom-4 opacity-30 font-light">search</span>
                 </div>
 
-                <div id="filterPanel" class="animate-fade-up-3 flex flex-wrap gap-4 md:gap-8 mt-6 w-full max-w-3xl justify-center text-[9px] font-mono tracking-[0.1em] uppercase opacity-80 bg-white/70 px-6 py-4 backdrop-blur-md shadow-sm border border-line transition-all duration-500">
+                <div id="filterPanel" class="animate-fade-up-slow-3 flex flex-wrap gap-4 md:gap-8 mt-6 w-full max-w-3xl justify-center text-[9px] font-mono tracking-[0.1em] uppercase opacity-80 bg-white/70 px-6 py-4 backdrop-blur-md shadow-sm border border-line transition-all duration-500">
                     <select id="sortData" class="bg-transparent border-b border-primary/20 outline-none pb-1 cursor-pointer focus:border-primary focus:opacity-100 hover:opacity-100 transition-opacity">
                         <option value="none">SORT: DEFAULT</option>
                         <option value="name-asc">NAME: A TO Z</option>
@@ -156,15 +145,18 @@
                     </select>
                 </div>
 
-                <div class="animate-fade-up-3 flex gap-8 mt-10 border-t border-line pt-6 w-full max-w-xs justify-center text-[9px] font-mono tracking-[0.2em] uppercase bg-white/60 px-6 py-2 rounded-full backdrop-blur-sm">
+                <div class="animate-fade-up-slow-3 flex gap-8 mt-10 border-t border-line pt-6 w-full max-w-xs justify-center text-[9px] font-mono tracking-[0.2em] uppercase bg-white/60 px-6 py-2 rounded-full backdrop-blur-sm">
                     <button onclick="setViewMode('stack')" id="btn-view-stack" class="opacity-100 font-bold transition-all hover:opacity-80">Visual View</button>
                     <span class="opacity-20">/</span>
                     <button onclick="setViewMode('list')" id="btn-view-list" class="opacity-30 hover:opacity-100 transition-all">Minimal List</button>
                 </div>
             </header>
 
-            <div id="view-stack" class="view-mode active w-full flex-col items-center pb-[20vh] pt-12 gap-40"></div>
-            <div id="view-list" class="view-mode w-full max-w-5xl mx-auto px-6 md:px-12 flex-col items-center pb-[30vh] pt-12 gap-10"></div>
+            <div id="view-stack" class="view-mode active w-full flex-col items-center pb-[20vh] pt-12 gap-40">
+                </div>
+
+            <div id="view-list" class="view-mode w-full max-w-5xl mx-auto px-6 md:px-12 flex-col items-center pb-[30vh] pt-12 gap-10">
+                </div>
         </div>
 
         <div id="page-ecosystem" class="page-section pt-32 max-w-5xl mx-auto px-6 md:px-12 pb-48">
